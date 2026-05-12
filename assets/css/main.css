@@ -2658,6 +2658,82 @@ input, select, textarea {
 
 			}
 
+/* Portfolio */
+
+	.portfolio-intro {
+		font-size: 1.1em;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 52em;
+		text-align: center;
+	}
+
+	.project-grid li {
+		padding-bottom: 3em;
+	}
+
+	.project-grid p {
+		margin-bottom: 1.25em;
+	}
+
+	.project-grid .actions {
+		margin-bottom: 0;
+	}
+
+	.tag-list {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-flex-wrap: wrap;
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		list-style: none;
+		margin: 0 0 1.5em 0;
+		padding: 0;
+	}
+
+		.tag-list li {
+			background: rgba(0, 0, 0, 0.075);
+			border-radius: 3px;
+			color: #2E3842;
+			display: inline-block;
+			font-size: 0.75em;
+			font-weight: 600;
+			letter-spacing: 0.075em;
+			line-height: 1;
+			padding: 0.7em 0.9em;
+			text-transform: uppercase;
+			width: auto;
+		}
+
+			.tag-list li:before {
+				display: none;
+			}
+
+	@media screen and (max-width: 980px) {
+
+		.project-grid li {
+			text-align: left;
+		}
+
+	}
+
+	@media screen and (max-width: 736px) {
+
+		.portfolio-intro {
+			text-align: left;
+		}
+
+		.tag-list li {
+			border-top: 0;
+			padding: 0.7em 0.9em;
+		}
+
+	}
+
 /* Spotlight */
 
 	.spotlight {
