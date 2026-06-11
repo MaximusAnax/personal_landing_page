@@ -1,0 +1,118 @@
+---
+layout: layouts/landing.njk
+title: Home
+permalink: /
+---
+
+<section id="banner">
+  <div class="inner">
+    <h2>{{ site.name }}</h2>
+    <p>Student<br /><br />
+    Builder<br /><br />
+    Long Shot</p>
+  </div>
+  <a href="#one" class="more scrolly">Learn More</a>
+</section>
+
+<section id="one" class="wrapper alt style2 spotlight-compact">
+  <section class="spotlight">
+    <div class="image"><img src="/images/pic01.jpg" alt="" /></div><div class="content">
+      <h2>About Me</h2>
+      <p>I am a Carnegie Mellon computer science student building at the intersection of AI, data, finance, and developer tooling. My education has taught me many valuable skills, but most importantly, it has taught me how to learn quickly and keep going when the problem is unfamiliar. That is the part of engineering that keeps pulling me forward.</p>
+      <ul class="actions">
+        <li><a href="{{ site.linkedin }}" class="button">LinkedIn</a></li>
+        <li><a href="/portfolio/" class="button">Portfolio</a></li>
+      </ul>
+    </div>
+  </section>
+  <section class="spotlight">
+    <div class="image"><img src="/images/pic02.jpg" alt="" /></div><div class="content">
+      <h2>Builder</h2>
+      <p>For as long as I can remember, nothing has made me happier than creating or improving objects, music, videos, workout routines, products, and systems. Whatever my hobbies and passions have been, the building aspect has always drawn me in.</p>
+      <ul class="actions">
+        <li><a href="/portfolio/" class="button">Portfolio</a></li>
+        <li><a href="{{ site.github }}" class="button">GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+</section>
+
+<section id="blog-preview" class="wrapper style2 special landing-compact">
+  <div class="inner">
+    <header class="major">
+      <h2>Latest Posts</h2>
+      <p>Thoughts on building, learning, and whatever else is on my mind.</p>
+    </header>
+    <ul class="post-list blog-preview-list">
+      {% for post in collections.posts | limit(3) %}
+      <li>
+        <span class="post-list-date">{{ post.date | readableDate }}</span>
+        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+        <p>{{ post.data.description }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul class="actions special">
+      <li><a href="/blog/" class="button primary">Read the Blog</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="headphone-lens" class="wrapper style3 special landing-compact">
+  <div class="inner">
+    <header class="major">
+      <h2>Headphone Lens</h2>
+      <p>What I have been listening to lately.</p>
+    </header>
+    <div class="headphone-lens-grid">
+      <div class="now-playing-card{% if lastfm.nowPlaying.isLive %} is-live{% endif %}{% if lastfm.nowPlaying.showWave %} has-track{% endif %}">
+        <img class="now-playing-art" src="{{ lastfm.nowPlaying.coverUrl }}" alt="{{ lastfm.nowPlaying.track }} by {{ lastfm.nowPlaying.artist }}" />
+        <div class="now-playing-meta">
+          <span class="now-playing-label">{{ lastfm.nowPlaying.label }}</span>
+          <p class="now-playing-track">{{ lastfm.nowPlaying.track }}</p>
+          <p class="now-playing-artist">{{ lastfm.nowPlaying.artist }}</p>
+          <div class="sound-wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+      <div class="top-albums-block">
+        <h3>Top albums</h3>
+        <ul class="music-covers">
+          {% for album in lastfm.topAlbums %}
+          <li>
+            {% if album.url %}<a href="{{ album.url }}" target="_blank" rel="noopener">{% endif %}
+            <img src="{{ album.coverUrl }}" alt="{{ album.title }} by {{ album.artist }}" />
+            <span class="label">{{ album.title }}</span>
+            {% if album.url %}</a>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <ul class="actions special">
+          <li><a href="{% if site.lastfmUsername %}https://www.last.fm/user/{{ site.lastfmUsername }}/{% else %}https://www.last.fm/{% endif %}" class="button" target="_blank" rel="noopener">View on Last.fm</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="two" class="wrapper style3 special">
+  <div class="inner">
+    <header class="major">
+      <h2>News</h2>
+      <p>Recent updates and milestones.<br />
+      As I look into the future, I hope to add many more to this list!</p>
+    </header>
+    <ul class="features">
+      {% for item in news | sortNews | limit(6) %}
+      <li class="icon {{ item.icon }}">
+        <h3>{% if item.title %}{{ item.title }}{% else %}{{ item.date | newsDate }}{% endif %}</h3>
+        <p>{% if item.link %}<a href="{{ item.link }}">{% endif %}{{ item.text | safe }}{% if item.link %}</a>{% endif %}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <ul class="actions special">
+      <li><a href="/news/" class="button">View All News</a></li>
+    </ul>
+  </div>
+</section>

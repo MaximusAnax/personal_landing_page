@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+---
+
+<article id="main" class="post-article">
+  <header>
+    <h2>{{ title }}</h2>
+    {% if description %}<p class="post-description">{{ description | nl2br | safe }}</p>{% endif %}
+    {% if date %}
+    <p class="post-meta">{{ date | readableDate }}</p>
+    {% endif %}
+  </header>
+  <section class="wrapper style5">
+    <div class="inner post-content">
+      {{ content | safe }}
+    </div>
+  </section>
+</article>

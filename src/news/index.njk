@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+title: News
+description: Updates, milestones, and announcements.
+permalink: /news/
+---
+
+<article id="main">
+  <header>
+    <h2>News</h2>
+    <p>Updates, milestones, and announcements.</p>
+  </header>
+  <section class="wrapper style5">
+    <div class="inner">
+      <table class="news-table">
+        <tbody>
+          {% for item in news | sortNews %}
+          <tr>
+            <td class="news-table-date">{{ item.date | newsDateFull }}</td>
+            <td class="news-table-text">
+              {% if item.link %}<a href="{{ item.link }}">{% endif %}
+              {% if item.title %}<strong>{{ item.title }}.</strong> {% endif %}{{ item.text | safe }}
+              {% if item.link %}</a>{% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,14 @@
+{
+  "name": "abdoulndiongue-site",
+  "private": true,
+  "scripts": {
+    "sass:build": "sass assets/sass/main.scss assets/css/main.css --style=expanded && sass assets/sass/noscript.scss assets/css/noscript.css --style=expanded",
+    "build": "npm run sass:build && eleventy",
+    "dev": "npm run sass:build && eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "sass": "1.77.6"
+  }
+}

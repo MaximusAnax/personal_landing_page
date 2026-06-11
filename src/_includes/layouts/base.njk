@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{% if title %}{{ title }} - {% endif %}{{ site.name }}</title>
+    {% include "head.njk" %}
+  </head>
+  <body class="is-preload">
+    <div id="page-wrapper">
+      {% include "header.njk" %}
+      {{ content | safe }}
+      {% include "footer.njk" %}
+    </div>
+    {% include "scripts.njk" %}
+  </body>
+</html>

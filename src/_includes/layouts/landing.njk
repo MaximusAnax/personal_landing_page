@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{% if title %}{{ title }} - {% endif %}{{ site.name }}</title>
+    {% include "head.njk" %}
+  </head>
+  <body class="landing is-preload">
+    <div id="page-wrapper">
+      {% set landing = true %}
+      {% include "header.njk" %}
+      {{ content | safe }}
+      {% include "footer.njk" %}
+    </div>
+    {% include "scripts.njk" %}
+    <script src="/assets/js/spotlight-equalize.js"></script>
+  </body>
+</html>
