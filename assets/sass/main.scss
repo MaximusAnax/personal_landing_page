@@ -905,11 +905,12 @@
 	button,
 	.button {
 		@include vendor('appearance', 'none');
+		@include vendor('box-sizing', 'border-box');
 		@include vendor('transition', ('background-color #{_duration(transitions)} ease-in-out', 'color #{_duration(transitions)} ease-in-out'));
 		background-color: transparent;
 		border-radius: 3px;
-		border: 0;
-		box-shadow: inset 0 0 0 2px _palette(border);
+		border: solid 2px _palette(border);
+		box-shadow: none;
 		color: _palette(fg-bold);
 		cursor: pointer;
 		display: inline-block;
@@ -917,7 +918,7 @@
 		font-weight: _font(weight-bold);
 		height: 3.125em;
 		letter-spacing: _size(letter-spacing-alt);
-		line-height: 3.125em;
+		line-height: calc(3.125em - 4px);
 		max-width: 30em;
 		padding: 0 2.75em;
 		text-align: center;
@@ -955,15 +956,18 @@
 
 		&.primary {
 			background-color: _palette(accent6, bg);
+			border-color: _palette(accent6, bg);
 			box-shadow: none !important;
 			color: _palette(accent6, fg-bold) !important;
 
 			&:hover {
 				background-color: lighten(_palette(accent6, bg), 5) !important;
+				border-color: lighten(_palette(accent6, bg), 5) !important;
 			}
 
 			&:active {
 				background-color: darken(_palette(accent6, bg), 5) !important;
+				border-color: darken(_palette(accent6, bg), 5) !important;
 			}
 		}
 
@@ -975,7 +979,7 @@
 
 		@include breakpoint('<=small') {
 			height: 3.75em;
-			line-height: 3.75em;
+			line-height: calc(3.75em - 4px);
 		}
 	}
 
@@ -989,7 +993,7 @@
 		padding: 0;
 		width: 100%;
 
-		li {
+		> li {
 			@include padding(4em, 4em, (0,0,0,2em));
 			display: block;
 			position: relative;
@@ -1366,7 +1370,8 @@
 			input[type="button"],
 			button,
 			.button {
-				box-shadow: inset 0 0 0 2px _palette($p, border);
+				border-color: _palette($p, border);
+				box-shadow: none;
 				color: _palette($p, fg-bold);
 
 				&:hover {
@@ -1381,7 +1386,7 @@
 		// Features
 
 			.features {
-				li {
+				> li {
 					@include breakpoint('<=small') {
 						border-top-color: _palette($p, border);
 					}
@@ -1662,7 +1667,7 @@
 
 		h2 {
 			@include vendor('transform', 'scale(1)');
-			@include vendor('transition', ('transform 0.5s ease', 'opacity 0.5s ease'));
+			@include vendor('transition', ('transform 0.35s ease', 'opacity 0.35s ease'));
 			display: inline-block;
 			font-size: 1.75em;
 			opacity: 1;
@@ -1671,8 +1676,8 @@
 			z-index: 1;
 
 			&:before, &:after {
-				@include vendor('transition', 'width 0.85s ease');
-				@include vendor('transition-delay', '0.25s');
+				@include vendor('transition', 'width 0.6s ease');
+				@include vendor('transition-delay', '0.18s');
 				background: _palette(fg-bold);
 				content: '';
 				display: block;
@@ -1702,8 +1707,8 @@
 		}
 
 		.more {
-			@include vendor('transition', ('transform 0.75s ease', 'opacity 0.75s ease'));
-			@include vendor('transition-delay', '3.5s');
+			@include vendor('transition', ('transform 0.53s ease', 'opacity 0.53s ease'));
+			@include vendor('transition-delay', '2.45s');
 			@include vendor('transform', 'translateY(0)');
 			border: none;
 			bottom: 0;
@@ -1741,7 +1746,7 @@
 		&:after {
 			@include vendor('pointer-events', 'none');
 			@include vendor('transition', 'opacity #{_duration(fadein)} ease-in-out');
-			@include vendor('transition-delay', '1.25s');
+			@include vendor('transition-delay', '0.88s');
 			content: '';
 			background: _palette(bg);
 			display: block;
@@ -1973,7 +1978,7 @@
 		#page-wrapper {
 			@include vendor('background-image', ('linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5))', 'url("../../images/banner.jpg")'));
 			background-attachment: fixed;
-			background-position: center center;
+			background-position: var(--banner-bg-position, center center);
 			background-repeat: no-repeat;
 			background-size: cover;
 			padding-top: 0;
@@ -1993,7 +1998,7 @@
 			#banner,
 			.wrapper.style4 {
 				@include vendor('background-image', ('linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5))', 'url("../../images/banner.jpg")'));
-				background-position: center center;
+				background-position: var(--banner-bg-position, center center);
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
@@ -2259,30 +2264,75 @@
 	}
 
 	#one.spotlight-compact {
+		padding: 0;
+		height: 100vh;
+		min-height: 35em;
+		overflow: hidden;
+		@include vendor('display', 'flex');
+		@include vendor('flex-direction', 'column');
+		@include vendor('box-sizing', 'border-box');
+
 		.spotlight {
+			@include vendor('align-items', 'stretch');
+			@include vendor('flex', '1 1 0');
+			min-height: 0;
+			overflow: hidden;
+
 			.image {
 				width: 35%;
+				overflow: hidden;
+				flex-shrink: 0;
+
+				img {
+					display: block;
+					height: 100%;
+					object-fit: cover;
+					width: 100%;
+				}
 			}
 
 			.content {
 				@include padding(1.25em, 2em);
+				@include vendor('display', 'flex');
+				@include vendor('flex-direction', 'column');
+				@include vendor('justify-content', 'center');
+				min-height: 0;
+				overflow: hidden;
 				width: 65%;
 
 				p {
 					margin-bottom: 1em;
 				}
 			}
+		}
 
-			@include breakpoint('<=medium') {
+		@include breakpoint('<=medium') {
+			height: auto;
+			min-height: 0;
+			overflow: visible;
+			display: block;
+			@include padding(2em, 0);
+
+			.spotlight {
+				flex: none;
+				overflow: visible;
+
+				.image img {
+					height: auto;
+					max-height: 18em;
+				}
+
 				.content {
+					display: block;
+					overflow: visible;
 					@include padding(2.5em, 3em);
 				}
 			}
+		}
 
-			@include breakpoint('<=small') {
-				.content {
-					@include padding(2em, 2em);
-				}
+		@include breakpoint('<=small') {
+			.spotlight .content {
+				@include padding(2em, 2em);
 			}
 		}
 	}

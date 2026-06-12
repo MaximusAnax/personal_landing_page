@@ -4,7 +4,7 @@
     <title>{% if title %}{{ title }} - {% endif %}{{ site.name }}</title>
     {% include "head.njk" %}
   </head>
-  <body class="landing is-preload">
+  <body class="landing is-preload" style="--banner-bg-position: {{ images.banner.position }};">
     <div id="page-wrapper">
       {% set landing = true %}
       {% include "header.njk" %}
@@ -12,6 +12,5 @@
       {% include "footer.njk" %}
     </div>
     {% include "scripts.njk" %}
-    <script src="/assets/js/spotlight-equalize.js"></script>
   </body>
 </html>
