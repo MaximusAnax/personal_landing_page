@@ -1667,7 +1667,7 @@
 
 		h2 {
 			@include vendor('transform', 'scale(1)');
-			@include vendor('transition', ('transform 0.35s ease', 'opacity 0.35s ease'));
+			@include vendor('transition', ('transform 0.24s ease', 'opacity 0.24s ease'));
 			display: inline-block;
 			font-size: 1.75em;
 			opacity: 1;
@@ -1676,8 +1676,8 @@
 			z-index: 1;
 
 			&:before, &:after {
-				@include vendor('transition', 'width 0.6s ease');
-				@include vendor('transition-delay', '0.18s');
+				@include vendor('transition', 'width 0.4s ease');
+				@include vendor('transition-delay', '0.12s');
 				background: _palette(fg-bold);
 				content: '';
 				display: block;
@@ -1707,8 +1707,8 @@
 		}
 
 		.more {
-			@include vendor('transition', ('transform 0.53s ease', 'opacity 0.53s ease'));
-			@include vendor('transition-delay', '2.45s');
+			@include vendor('transition', ('transform 0.36s ease', 'opacity 0.36s ease'));
+			@include vendor('transition-delay', '1.64s');
 			@include vendor('transform', 'translateY(0)');
 			border: none;
 			bottom: 0;
@@ -1746,7 +1746,7 @@
 		&:after {
 			@include vendor('pointer-events', 'none');
 			@include vendor('transition', 'opacity #{_duration(fadein)} ease-in-out');
-			@include vendor('transition-delay', '0.88s');
+			@include vendor('transition-delay', '0.59s');
 			content: '';
 			background: _palette(bg);
 			display: block;

@@ -2960,10 +2960,10 @@ body.is-menu-visible #menu {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-  -moz-transition: -moz-transform 0.35s ease, opacity 0.35s ease;
-  -webkit-transition: -webkit-transform 0.35s ease, opacity 0.35s ease;
-  -ms-transition: -ms-transform 0.35s ease, opacity 0.35s ease;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  -moz-transition: -moz-transform 0.24s ease, opacity 0.24s ease;
+  -webkit-transition: -webkit-transform 0.24s ease, opacity 0.24s ease;
+  -ms-transition: -ms-transform 0.24s ease, opacity 0.24s ease;
+  transition: transform 0.24s ease, opacity 0.24s ease;
   display: inline-block;
   font-size: 1.75em;
   opacity: 1;
@@ -2972,14 +2972,14 @@ body.is-menu-visible #menu {
   z-index: 1;
 }
 #banner h2:before, #banner h2:after {
-  -moz-transition: width 0.6s ease;
-  -webkit-transition: width 0.6s ease;
-  -ms-transition: width 0.6s ease;
-  transition: width 0.6s ease;
-  -moz-transition-delay: 0.18s;
-  -webkit-transition-delay: 0.18s;
-  -ms-transition-delay: 0.18s;
-  transition-delay: 0.18s;
+  -moz-transition: width 0.4s ease;
+  -webkit-transition: width 0.4s ease;
+  -ms-transition: width 0.4s ease;
+  transition: width 0.4s ease;
+  -moz-transition-delay: 0.12s;
+  -webkit-transition-delay: 0.12s;
+  -ms-transition-delay: 0.12s;
+  transition-delay: 0.12s;
   background: #fff;
   content: "";
   display: block;
@@ -3003,14 +3003,14 @@ body.is-menu-visible #menu {
   color: inherit;
 }
 #banner .more {
-  -moz-transition: -moz-transform 0.53s ease, opacity 0.53s ease;
-  -webkit-transition: -webkit-transform 0.53s ease, opacity 0.53s ease;
-  -ms-transition: -ms-transform 0.53s ease, opacity 0.53s ease;
-  transition: transform 0.53s ease, opacity 0.53s ease;
-  -moz-transition-delay: 2.45s;
-  -webkit-transition-delay: 2.45s;
-  -ms-transition-delay: 2.45s;
-  transition-delay: 2.45s;
+  -moz-transition: -moz-transform 0.36s ease, opacity 0.36s ease;
+  -webkit-transition: -webkit-transform 0.36s ease, opacity 0.36s ease;
+  -ms-transition: -ms-transform 0.36s ease, opacity 0.36s ease;
+  transition: transform 0.36s ease, opacity 0.36s ease;
+  -moz-transition-delay: 1.64s;
+  -webkit-transition-delay: 1.64s;
+  -ms-transition-delay: 1.64s;
+  transition-delay: 1.64s;
   -moz-transform: translateY(0);
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
@@ -3048,14 +3048,14 @@ body.is-menu-visible #menu {
 }
 #banner:after {
   pointer-events: none;
-  -moz-transition: opacity 2.1s ease-in-out;
-  -webkit-transition: opacity 2.1s ease-in-out;
-  -ms-transition: opacity 2.1s ease-in-out;
-  transition: opacity 2.1s ease-in-out;
-  -moz-transition-delay: 0.88s;
-  -webkit-transition-delay: 0.88s;
-  -ms-transition-delay: 0.88s;
-  transition-delay: 0.88s;
+  -moz-transition: opacity 1.41s ease-in-out;
+  -webkit-transition: opacity 1.41s ease-in-out;
+  -ms-transition: opacity 1.41s ease-in-out;
+  transition: opacity 1.41s ease-in-out;
+  -moz-transition-delay: 0.59s;
+  -webkit-transition-delay: 0.59s;
+  -ms-transition-delay: 0.59s;
+  transition-delay: 0.59s;
   content: "";
   background: #2e3842;
   display: block;
