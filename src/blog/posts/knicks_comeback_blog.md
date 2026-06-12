@@ -13,7 +13,7 @@ permalink: /blog/my-most-expensive-lesson/
 
 The scoreboard read 49-76 at halftime.
 
-Game 4 of the NBA Finals. The New York Knicks, *my* Knicks, down 27 points to the San Antonio Spurs with 24 minutes left to play. Prediction markets had them at 6% to win. Six. The announcers had already started eulogizing the season. The group chat went quiet in that specific way it does when everyone agrees something is dead but nobody wants to say it.
+Game 4 of the NBA Finals. The New York Knicks down 27 points to the San Antonio Spurs with 24 minutes left to play. Prediction markets had them at 6% to win. Six. The announcers had already started eulogizing the season. The room went quiet in that specific way it does when everyone agrees something is dead but nobody wants to say it.
 
 I had three positions open. $20 on Jalen Brunson to score 35 or more points, taken at 22 cents on the dollar, because I'd watched this man all season and knew what he was capable of when it mattered. $20 on the Knicks to win, placed before tip-off. And another $40 on the Knicks at 6 cents on the dollar, added as the deficit grew. Not to chase a loss. Because I still believed, and the market was offering me $666 to be right about it.
 
