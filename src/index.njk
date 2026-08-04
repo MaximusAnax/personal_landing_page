@@ -104,7 +104,7 @@ permalink: /
       As I look into the future, I hope to add many more to this list!</p>
     </header>
     <ul class="features">
-      {% for item in news | sortNews | limit(6) %}
+      {% for item in news | sortNews | limit(5) %}
       <li class="icon {{ item.icon }}">
         <h3>{% if item.title %}{{ item.title }}{% else %}{{ item.date | newsDate }}{% endif %}</h3>
         <p>{% if item.link %}<a href="{{ item.link }}">{% endif %}{{ item.text | safe }}{% if item.link %}</a>{% endif %}</p>

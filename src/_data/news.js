@@ -1,5 +1,35 @@
 module.exports = [
   {
+    date: "2026-06-01",
+    icon: "solid fa-briefcase",
+    title: "Received my first offer for Summer 2027",
+    text: "Landed my first internship offer for the summer of 2027.",
+  },
+  {
+    date: "2026-05-01",
+    icon: "solid fa-brain",
+    title: "Started research with Prof. Matt Gormley",
+    text: "Joined a research project studying Computer Use Agents.",
+  },
+  {
+    date: "2026-03-01",
+    icon: "solid fa-trophy",
+    title: "Placed 2nd at the Felicis Hackathon",
+    text: "Took home a pair of Meta Ray-Bans and a meeting with a Felicis Partner.",
+  },
+  {
+    date: "2025-09-01",
+    icon: "solid fa-users",
+    title: "Led recruitment for Phi Delta Theta",
+    text: "Ran recruitment for my fraternity and set a record for the largest recruitment class ever.",
+  },
+  {
+    date: "2025-06-01",
+    icon: "solid fa-gamepad",
+    title: "Interned at Microsoft",
+    text: "Spent the summer interning on the Xbox team at Microsoft.",
+  },
+  {
     date: "2024-06-01",
     icon: "fa-paper-plane",
     text: "Landed my first internship!<br /><br />Data Engineering @ Success Academy",
