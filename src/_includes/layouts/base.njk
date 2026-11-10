@@ -1,15 +1,13 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>{% if title %}{{ title }} - {% endif %}{{ site.name }}</title>
     {% include "head.njk" %}
   </head>
-  <body class="is-preload">
-    <div id="page-wrapper">
-      {% include "header.njk" %}
+  <body class="{{ bodyClass or 'page' }}">
+    {% include "header.njk" %}
+    <main id="main">
       {{ content | safe }}
-      {% include "footer.njk" %}
-    </div>
-    {% include "scripts.njk" %}
+    </main>
+    {% include "footer.njk" %}
   </body>
 </html>

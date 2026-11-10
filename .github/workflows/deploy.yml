@@ -3,8 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Refresh the Last.fm "On rotation" strip a few times a day.
+  # (GitHub pauses schedules after 60 days without a push; the site stays up, only the music data goes stale.)
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "17 */6 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,7 +26,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci

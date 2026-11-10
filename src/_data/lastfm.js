@@ -1,7 +1,5 @@
-const music = require("./music.js");
 const site = require("./site.js");
 
-const FALLBACK_COVER = "/images/music/album1.jpg";
 const GENERIC_ARTIST_IMAGE = "2a96cbd8b46e442fc41c2b86b821562f";
 
 function pickImage(images) {
@@ -49,22 +47,8 @@ function profileUrl() {
 }
 
 function fallbackData() {
-  return {
-    topAlbums: music.recentAlbums.map((album) => ({
-      title: album.title,
-      artist: album.artist,
-      coverUrl: album.coverUrl,
-      url: profileUrl(),
-    })),
-    nowPlaying: {
-      isLive: false,
-      showWave: false,
-      label: "Recently Played",
-      track: "Connect Last.fm",
-      artist: "Set LASTFM_API_KEY and lastfmUsername",
-      coverUrl: FALLBACK_COVER,
-    },
-  };
+  // No placeholders: templates hide the music strip when there is nothing real to show.
+  return { topAlbums: [], nowPlaying: null, profileUrl: profileUrl() };
 }
 
 function coverFromTopAlbums(track, topAlbums) {
@@ -126,13 +110,18 @@ module.exports = async function () {
 
     let albums = albumsData?.topalbums?.album;
     if (albums && !Array.isArray(albums)) albums = [albums];
+    if (!albums || albums.length === 0) {
+      const wider = await fetchJson(albumsUrl.replace(/period=[^&]+/, "period=3month"));
+      albums = wider?.topalbums?.album;
+      if (albums && !Array.isArray(albums)) albums = [albums];
+    }
 
     const topAlbums = (albums || [])
       .slice(0, site.topAlbumsLimit)
       .map((album) => ({
         title: album.name,
         artist: artistName(album.artist),
-        coverUrl: pickImage(album.image) || FALLBACK_COVER,
+        coverUrl: pickImage(album.image) || null,
         url: album.url,
       }));
 
@@ -143,7 +132,7 @@ module.exports = async function () {
     const isLive = Boolean(current);
     if (!current) current = tracks?.[0];
 
-    let nowPlaying = fallbackData().nowPlaying;
+    let nowPlaying = null;
 
     if (current) {
       const artist = artistName(current.artist);
@@ -163,14 +152,14 @@ module.exports = async function () {
         label: isLive ? "Now Playing" : "Recently Played",
         track: current.name,
         artist,
-        coverUrl: coverUrl || FALLBACK_COVER,
+        coverUrl: coverUrl || null,
       };
     }
 
-    const fallback = fallbackData();
     return {
-      topAlbums: topAlbums.length ? topAlbums : fallback.topAlbums,
+      topAlbums: topAlbums.filter((a) => a.coverUrl),
       nowPlaying,
+      profileUrl: profileUrl(),
     };
   } catch (error) {
     console.warn("[lastfm]", error.message);

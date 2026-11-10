@@ -1,11 +1,15 @@
-<footer id="footer">
-  <ul class="icons">
-    <li><a href="{{ site.github }}" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-    <li><a href="{{ site.linkedin }}" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-    <li><a href="{{ site.instagram }}" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-    <li><a href="mailto:{{ site.email }}" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-  </ul>
-  <ul class="copyright">
-    <li>&copy;2026 {{ site.name }}</li><li>{{ site.version }}</li>
-  </ul>
+{% from "icons.njk" import icon %}
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2 class="footer-cta">Building something with agents? <a href="mailto:{{ site.email }}">Let's talk.</a></h2>
+    <ul class="footer-links">
+      <li><a href="mailto:{{ site.email }}">{{ icon("mail") }}<span>{{ site.email }}</span></a></li>
+      <li><a href="{{ site.github }}">{{ icon("github") }}<span>GitHub</span></a></li>
+      <li><a href="{{ site.linkedin }}">{{ icon("linkedin") }}<span>LinkedIn</span></a></li>
+      <li><a href="{{ site.instagram }}">{{ icon("instagram") }}<span>Instagram</span></a></li>
+      <li><a href="{{ site.resume }}">{{ icon("file") }}<span>Resume (PDF)</span></a></li>
+    </ul>
+    <p class="footer-meta">© {{ build.year }} {{ site.name }} · {{ site.location }} · Built with Eleventy, no framework.</p>
+  </div>
 </footer>

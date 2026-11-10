@@ -1,88 +1,45 @@
-# Abdoul Ndiongue — Personal Site
+# abdoulndiongue.com
 
-Static personal site built with [Eleventy](https://www.11ty.dev/) on the HTML5 UP Spectral theme. Deployed to GitHub Pages at [abdoulndiongue.com](https://abdoulndiongue.com).
+Source for [abdoulndiongue.com](https://abdoulndiongue.com), my personal site. It's a static [Eleventy](https://www.11ty.dev/) build with one hand-written stylesheet and about 30 lines of JavaScript, and no client framework. GitHub Pages deploys it through Actions.
 
-## Local development
+## Run it
 
 ```bash
 npm install
-npm run dev
+npm run dev     # http://localhost:8080
+npm run build   # writes _site/
 ```
 
-Open [http://localhost:8080](http://localhost:8080).
+Requires Node 20+.
 
-## Build
+## Where things live
 
-```bash
-npm run build
-```
+| What | File |
+| --- | --- |
+| Name, links, SEO description | `src/_data/site.js` |
+| Selected work (projects) | `src/_data/projects.js` |
+| Personal agent systems ("The lab") | `src/_data/lab.js` |
+| Experience, leadership, education | `src/_data/experience.js` |
+| News items | `src/_data/news.js` |
+| Blog posts | `src/blog/posts/*.md` |
+| Homepage template | `src/index.njk` |
+| Layout, `<head>`, header, footer | `src/_includes/` |
+| Styles (light and dark tokens) | `assets/css/site.css` |
+| Files served at the root (resume, favicon, OG image, robots) | `static/` |
 
-Output is written to `_site/`.
+To add a project, append an entry to `projects.js`. The homepage renders it automatically.
 
-## Last.fm (Headphone Lens)
+## Last.fm "On rotation"
 
-The homepage **Headphone Lens** section pulls now playing and top albums from Last.fm at build time.
+The music strip is fetched at build time, so the API key never ships to the browser.
 
-1. Create an API key at [last.fm/api/account/create](https://www.last.fm/api/account/create).
-2. Set your username in [`src/_data/site.js`](src/_data/site.js): `lastfmUsername: "your-username"`.
-3. For local builds, create a `.env` file in the project root:
+- **Locally:** put `LASTFM_API_KEY=...` in `.env`.
+- **In CI:** the key comes from the `LASTFM_API_KEY` Actions secret.
 
-   ```
-   LASTFM_API_KEY=your_api_key_here
-   ```
+The workflow rebuilds on every push and every 6 hours. If there's no key or Last.fm returns nothing, the section is hidden; it never shows placeholder data.
 
-4. For production, add `LASTFM_API_KEY` as a **GitHub Actions secret** (Settings → Secrets and variables → Actions).
+GitHub pauses scheduled workflows after 60 days with no pushes. If that happens, the site stays up and only the music goes stale. Re-enable it under **Actions → Deploy → Enable workflow**.
 
-The deploy workflow rebuilds every **15 minutes** (cron) so now playing stays reasonably fresh without exposing your API key in the browser. You can also trigger a manual rebuild from the Actions tab.
+## Deploy
 
-Optional: change `topAlbumsPeriod` in `site.js` (`overall`, `1month`, `3month`, etc.).
-
-If the API key or username is missing, the section falls back to placeholder albums from [`src/_data/music.js`](src/_data/music.js).
-
-## Content workflow
-
-| Task | Edit |
-|------|------|
-| Write a blog post | Add `src/blog/posts/my-post.md` with front matter (`title`, `date`, `description`, `permalink`) |
-| Add news | Edit `src/_data/news.js` |
-| Update interests (future About Me) | Edit `src/_data/interests.js` |
-| Last.fm username / album period | Edit `src/_data/site.js` |
-| Replace site photos | Overwrite files in `images/` (see `images/README.md`) |
-| Change nav or footer | Edit `src/_includes/header.njk` or `footer.njk` |
-
-### Blog post example
-
-````markdown
----
-layout: layouts/post.njk
-title: My Post Title
-description: |
-  First line of the subtitle.
-  Second line, aligned how you want it.
-date: 2026-06-11
-permalink: /blog/my-post-title/
----
-
-Your content here in Markdown.
-````
-
-**Description line breaks:** use `description: |` in front matter (as above) so each line becomes a break in the post header. You can also use `<br />` in a quoted string: `description: "Line one<br />Line two"`.
-
-## Deployment
-
-Pushes to `main` and the 15-minute cron schedule run [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds the site and publishes `_site/` to GitHub Pages. Ensure GitHub Pages is set to **GitHub Actions** as the source in repository settings.
-
-## Project structure
-
-```
-src/              Templates and content
-  _data/          JS data (news, interests, music, lastfm, site)
-  _includes/      Shared layout partials
-  blog/posts/     Markdown blog posts
-  index.njk       Homepage
-  portfolio.njk   Portfolio page
-  news/           News archive
-assets/           CSS, JS, fonts (Spectral theme)
-images/           Site photos and album covers
-CNAME             Custom domain for GitHub Pages
-```
+Every push to `main` triggers `.github/workflows/deploy.yml`, which builds and publishes to GitHub Pages. `CNAME` points the custom domain at Pages.

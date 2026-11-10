@@ -4,47 +4,45 @@ require("dotenv").config();
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
-  eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("CNAME");
+  // Files in /static are served from the site root (resume.pdf, favicon, robots.txt, og image).
+  eleventyConfig.addPassthroughCopy({ static: "/" });
 
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLL dd, yyyy");
-  });
+  eleventyConfig.addGlobalData("build", () => ({
+    year: new Date().getFullYear(),
+    iso: new Date().toISOString(),
+  }));
 
-  eleventyConfig.addFilter("shortDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("MMM ''yy");
-  });
+  eleventyConfig.addFilter("readableDate", (dateObj) =>
+    DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLL d, yyyy")
+  );
 
-  eleventyConfig.addFilter("newsDate", (dateStr) => {
-    return DateTime.fromISO(dateStr).toFormat("MMM ''yy");
-  });
+  eleventyConfig.addFilter("isoDate", (dateObj) =>
+    DateTime.fromJSDate(dateObj, { zone: "utc" }).toISODate()
+  );
 
-  eleventyConfig.addFilter("newsDateFull", (dateStr) => {
-    return DateTime.fromISO(dateStr).toFormat("LLL dd, yyyy");
-  });
+  eleventyConfig.addFilter("newsDate", (dateStr) =>
+    DateTime.fromISO(dateStr).toFormat("LLL yyyy")
+  );
 
   eleventyConfig.addFilter("sortNews", (news) => {
-    if (!news || !Array.isArray(news)) return [];
+    if (!Array.isArray(news)) return [];
     return [...news].sort((a, b) => new Date(b.date) - new Date(a.date));
   });
 
-  eleventyConfig.addFilter("limit", (array, limit) => {
-    if (!array || !Array.isArray(array)) return [];
-    return array.slice(0, limit);
-  });
+  eleventyConfig.addFilter("limit", (array, n) =>
+    Array.isArray(array) ? array.slice(0, n) : []
+  );
 
-  eleventyConfig.addFilter("nl2br", (value) => {
-    if (!value) return "";
-    return String(value)
-      .replace(/\r\n/g, "\n")
-      .replace(/\n/g, "<br />");
-  });
+  eleventyConfig.addFilter("nl2br", (value) =>
+    value ? String(value).replace(/\r?\n/g, "<br />") : ""
+  );
 
-  eleventyConfig.addCollection("posts", (collection) => {
-    return collection
+  eleventyConfig.addCollection("posts", (collection) =>
+    collection
       .getFilteredByGlob("src/blog/posts/*.md")
-      .sort((a, b) => b.date - a.date);
-  });
+      .sort((a, b) => b.date - a.date)
+  );
 
   return {
     dir: {

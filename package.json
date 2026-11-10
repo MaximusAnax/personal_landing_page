@@ -1,14 +1,18 @@
 {
   "name": "abdoulndiongue-site",
   "private": true,
+  "description": "Source for abdoulndiongue.com — Eleventy, no client framework.",
   "scripts": {
-    "sass:build": "sass assets/sass/main.scss assets/css/main.css --style=expanded && sass assets/sass/noscript.scss assets/css/noscript.css --style=expanded",
-    "build": "npm run sass:build && eleventy",
-    "dev": "npm run sass:build && eleventy --serve"
+    "build": "eleventy",
+    "dev": "eleventy --serve --port 8080",
+    "clean": "rm -rf _site"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "dotenv": "^16.4.5",
-    "sass": "1.77.6"
+    "luxon": "^3.5.0"
   }
 }

@@ -1,31 +1,23 @@
 ---
 layout: layouts/base.njk
 title: News
-description: Updates, milestones, and announcements.
+description: Milestones and updates from Abdoul Ndiongue.
 permalink: /news/
 ---
-
-<article id="main">
-  <header>
-    <h2>News</h2>
-    <p>Updates, milestones, and announcements.</p>
-  </header>
-  <section class="wrapper style5">
-    <div class="inner">
-      <table class="news-table">
-        <tbody>
-          {% for item in news | sortNews %}
-          <tr>
-            <td class="news-table-date">{{ item.date | newsDateFull }}</td>
-            <td class="news-table-text">
-              {% if item.link %}<a href="{{ item.link }}">{% endif %}
-              {% if item.title %}<strong>{{ item.title }}.</strong> {% endif %}{{ item.text | safe }}
-              {% if item.link %}</a>{% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </section>
-</article>
+<section class="wrap page-intro">
+  <p class="eyebrow">News</p>
+  <h1>Milestones, newest first.</h1>
+</section>
+<section class="wrap">
+  <ol class="news-full">
+    {% for item in news | sortNews %}
+    <li>
+      <span class="news-date">{{ item.date | newsDate }}</span>
+      <div>
+        <p class="news-title">{% if item.link %}<a href="{{ item.link }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</p>
+        {% if item.text %}<p class="muted">{{ item.text | safe }}</p>{% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
