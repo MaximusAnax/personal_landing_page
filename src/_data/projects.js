@@ -3,6 +3,24 @@ const gh = (repo) => `https://github.com/MaximusAnax/${repo}`;
 
 module.exports = [
   {
+    id: "cua",
+    title: "Computer-use agents",
+    kind: "Research · CMU Machine Learning Dept.",
+    years: "2026 –",
+    status: "Ongoing · with Prof. Matt Gormley",
+    tagline: "Why agents that drive a desktop fail, and how to build ones that run on small models.",
+    summary:
+      "This research has two connected threads. The first diagnoses failure: I run agents on OSWorld, log every trajectory, and attribute each failure to a cause. The second is an agent framework for small vision-language models that act from screen pixels alone, with no dependence on a frontier model.",
+    points: [
+      "Failure judge: trace logging, rule-based detectors and a VLM judge locate where each run went wrong (grounding, planning or navigation), so failure modes can be measured instead of guessed.",
+      "Evaluation harness: an OSWorld-style task runner with trajectory logs, failure-mode tagging and reproducible benchmark runs.",
+      "Small-VLM agent: modular perception, planning, action selection and recovery, with observation filtering and structured error recovery so it fits models that can run on a device.",
+    ],
+    stack: ["Python", "VLMs", "OSWorld", "LLM-as-judge"],
+    links: [],
+    note: "Lab code is private, happy to walk through it",
+  },
+  {
     id: "orbit",
     title: "Orbit",
     kind: "Agent memory",
@@ -56,24 +74,6 @@ module.exports = [
       { label: "Code", href: gh("traceback-ai") },
       { label: "Hackathon demo", href: gh("traceback_ai_hackathon_demo") },
     ],
-  },
-  {
-    id: "cua",
-    title: "Computer-use agent research",
-    kind: "Research · CMU Machine Learning Dept.",
-    years: "2026 –",
-    status: "Ongoing",
-    tagline: "Why do agents that drive a desktop from pixels fail, and how can small models do it?",
-    summary:
-      "I work with Prof. Matt Gormley on computer-use agents for small, on-device vision-language models that act from screen pixels alone.",
-    points: [
-      "Built an OSWorld-style harness: it runs tasks automatically, logs every trajectory, and makes benchmark runs reproducible.",
-      "Built failure-analysis tooling: trace logging, failure detectors, and failure attribution by a VLM judge.",
-      "Designed a modular agent with separate perception, planning, action-selection and recovery components.",
-    ],
-    stack: ["Python", "VLMs", "OSWorld"],
-    links: [],
-    note: "Lab code is private",
   },
   {
     id: "terrabot",
