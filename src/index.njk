@@ -21,19 +21,17 @@ bodyClass: page page-home
       <a class="btn" href="mailto:{{ site.email }}">{{ icon("mail", 16) }} Email</a>
     </div>
   </div>
-  <aside class="hero-side">
-    <figure class="portrait">
-      <img src="/assets/img/portrait.jpg" width="598" height="820" alt="Abdoul in sunglasses holding a baby goat on a sunny day at Carnegie Mellon" fetchpriority="high" />
-    </figure>
-    <div class="now" aria-label="What I'm doing now">
-      <p class="now-label"><span class="pulse" aria-hidden="true"></span>Now</p>
-      <ul>
-        <li>Researching why computer-use agents fail, with Prof. Matt Gormley</li>
-        <li>Building Orbit v2, an agent-native relationship memory</li>
-        <li>President of CMU's Interfraternity Council</li>
-      </ul>
-    </div>
-  </aside>
+  <figure class="portrait">
+    <img src="/assets/img/portrait.jpg" width="598" height="820" alt="Abdoul in sunglasses holding a baby goat on a sunny day at Carnegie Mellon" fetchpriority="high" />
+  </figure>
+  <div class="now" aria-label="What I'm doing now">
+    <p class="now-label"><span class="pulse" aria-hidden="true"></span>Now</p>
+    <ul>
+      <li>Researching why computer-use agents fail, with Prof. Matt Gormley</li>
+      <li>Building Orbit v2, an agent-native relationship memory</li>
+      <li>President of CMU's Interfraternity Council</li>
+    </ul>
+  </div>
 </section>
 
 <section class="section wrap" id="work" aria-labelledby="work-title">
@@ -42,6 +40,10 @@ bodyClass: page page-home
     <h2 id="work-title">Selected work</h2>
     <p>Agent systems first. For each project: what it does, how it's built, and how you can check it.</p>
   </header>
+
+  <nav class="work-index" aria-label="Jump to a project">
+    {% for p in projects %}<a href="#{{ p.id }}">{{ p.title }}</a>{% endfor %}
+  </nav>
 
   <div class="work-list">
     {% for p in projects %}
