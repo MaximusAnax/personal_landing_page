@@ -32,7 +32,7 @@ module.exports = {
     },
     {
       name: "bulk_proj_mono",
-      text: "Twelve local-first Python CLI tools, each planned, reviewed and gated by evals before it was built.",
+      text: "Twelve local-first Python CLI products in one uv workspace. Each was specified and adversarially reviewed before any code, and they are held to 242 eval gates and 4,518 tests.",
       href: "https://github.com/MaximusAnax/bulk_proj_mono",
     },
   ],

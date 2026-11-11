@@ -127,8 +127,10 @@ module.exports = [
     status: "Personal project",
     tagline: "Allocate differently when the market changes regime.",
     summary:
-      "A Hidden Markov Model labels markets as calm or crisis. Mean-variance allocation with Ledoit-Wolf shrinkage then blends the portfolio for each regime, and a walk-forward backtest checks it against benchmarks.",
-    points: [],
+      "A two-state Hidden Markov Model labels markets as calm or crisis, then blends a max-Sharpe portfolio and a minimum-volatility portfolio according to the regime probability. It is checked with a walk-forward backtest against SPY.",
+    points: [
+      "From 2017 to 2026 on six assets, it matched SPY's Sharpe ratio (0.54 vs 0.53) with a 23% maximum drawdown against SPY's 36%.",
+    ],
     stack: ["Python", "HMM", "MPT", "Backtesting"],
     links: [{ label: "Code", href: gh("portfolio_optimizer") }],
   },
