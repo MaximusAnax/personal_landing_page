@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Ndiongue;Abdoul;;;
+FN:Abdoul Ndiongue
+ORG:Carnegie Mellon University
+TITLE:CS + AI student · builds AI agents
+EMAIL;TYPE=INTERNET,PREF:abdoul.ndiongue@gmail.com
+URL:https://abdoulndiongue.com
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/abdoulndiongue
+X-SOCIALPROFILE;TYPE=github:https://github.com/MaximusAnax
+NOTE:abdoulndiongue.com · github.com/MaximusAnax
+END:VCARD

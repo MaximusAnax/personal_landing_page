@@ -59,7 +59,7 @@ bodyClass: page page-home
         <p>{{ p.summary }}</p>
 
         {% if p.versions %}
-        <ol class="versions">
+        <ol class="versions swipe" data-swipe aria-label="Orbit versions">
           {% for v in p.versions %}
           <li>
             <p class="v-tag">{{ v.tag }} · {{ v.name }}</p>
@@ -71,12 +71,20 @@ bodyClass: page page-home
           </li>
           {% endfor %}
         </ol>
+        <div class="swipe-dots" aria-hidden="true"></div>
         {% endif %}
 
-        {% if p.points and p.points.length %}
+        {% if p.points and p.points.length == 1 %}
         <ul class="points">
-          {% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}
+          <li>{{ p.points[0] }}</li>
         </ul>
+        {% elif p.points and p.points.length %}
+        <details class="work-details" open>
+          <summary>How it works <span class="count">{{ p.points.length }}</span></summary>
+          <ul class="points">
+            {% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}
+          </ul>
+        </details>
         {% endif %}
 
         <ul class="chips" aria-label="Stack">
@@ -101,7 +109,8 @@ bodyClass: page page-home
     <h2 id="lab-title">The lab</h2>
     <p>{{ lab.intro }}</p>
   </header>
-  <div class="lab-grid">
+  <p class="swipe-hint" aria-hidden="true">Swipe <span>→</span></p>
+  <div class="lab-grid swipe" data-swipe aria-label="Personal agent systems">
     {% for item in lab.items %}
     <article class="lab-card">
       <h3>{{ item.name }}</h3>
@@ -110,6 +119,7 @@ bodyClass: page page-home
     </article>
     {% endfor %}
   </div>
+  <div class="swipe-dots" aria-hidden="true"></div>
   <div class="more-builds">
     <p class="eyebrow">Also on GitHub</p>
     <ul>

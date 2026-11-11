@@ -9,7 +9,17 @@
       <li><a href="{{ site.linkedin }}">{{ icon("linkedin") }}<span>LinkedIn</span></a></li>
       <li><a href="{{ site.instagram }}">{{ icon("instagram") }}<span>Instagram</span></a></li>
       <li><a href="{{ site.resume }}">{{ icon("file") }}<span>Resume (PDF)</span></a></li>
+      <li><a href="/abdoul-ndiongue.vcf">{{ icon("contact") }}<span>Save contact</span></a></li>
+      <li><button type="button" class="share-btn footer-share" data-share-title="{{ site.name }}" data-share-text="{{ site.name }}: AI agents and the systems around them" data-share-url="{{ site.url }}">{{ icon("share") }}<span>Share this site</span></button></li>
     </ul>
     <p class="footer-meta">© {{ build.year }} {{ site.name }} · {{ site.location }} · Built with Eleventy, no framework.</p>
   </div>
 </footer>
+
+<nav class="dock" aria-label="Quick actions">
+  <a href="mailto:{{ site.email }}">{{ icon("mail", 20) }}<span>Email</span></a>
+  <a href="{{ site.resume }}">{{ icon("file", 20) }}<span>Resume</span></a>
+  <a href="/abdoul-ndiongue.vcf">{{ icon("contact", 20) }}<span>Save contact</span></a>
+  <button type="button" class="share-btn" data-share-title="{{ site.name }}" data-share-text="{{ site.name }}: AI agents and the systems around them" data-share-url="{{ site.url }}">{{ icon("share", 20) }}<span>Share</span></button>
+</nav>
+<p class="toast" role="status" aria-live="polite"></p>
