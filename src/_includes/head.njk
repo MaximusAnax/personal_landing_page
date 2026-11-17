@@ -18,8 +18,12 @@
 <meta name="description" content="{{ pageDesc | striptags | replace('\n', ' ') | trim }}" />
 <link rel="canonical" href="{{ canonical }}" />
 <meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)" />
+{%- if shell == "home" %}
+<meta name="theme-color" content="#eedfc0" />
+{%- else %}
+<meta name="theme-color" content="#f4ecdc" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0a3a3a" media="(prefers-color-scheme: dark)" />
+{%- endif %}
 <meta name="author" content="{{ site.name }}" />
 
 <meta property="og:type" content="{{ 'article' if layout == 'layouts/post.njk' else 'website' }}" />
@@ -38,6 +42,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
-<link rel="stylesheet" href="/assets/css/site.css" />
-<script src="/assets/js/site.js" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" />
+{%- if shell == "home" %}
+<link rel="stylesheet" href="/assets/css/home.css" />
+<script src="/assets/js/home.js" defer></script>
+{%- else %}
+<link rel="stylesheet" href="/assets/css/reader.css" />
+{%- if motif %}
+<script src="/assets/js/motifs/{{ motif.name }}.js" defer></script>
+{%- endif %}
+<script src="/assets/js/reader.js" defer></script>
+{%- endif %}

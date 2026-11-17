@@ -1,0 +1,16 @@
+{#
+  Motif: maze. For a story about finding a route: building from zero, getting unstuck, a search.
+  A fresh depth-first maze is generated on load and its solution draws in as the reader scrolls.
+
+  Front matter:
+    motif:
+      name: maze
+      caption: One line under the maze.
+  No closing panel.
+#}
+{%- if slot == "panel" %}
+<figure class="panel maze">
+  <canvas id="maze" aria-label="A randomly generated maze whose solution draws in as you scroll"></canvas>
+  <figcaption class="mono"><span>{{ motif.caption }}</span><button type="button" id="remaze">New maze</button></figcaption>
+</figure>
+{%- endif %}

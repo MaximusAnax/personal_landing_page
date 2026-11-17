@@ -14,4 +14,6 @@ module.exports = {
   lastfmUsername: "OniAbe",
   topAlbumsPeriod: "1month",
   topAlbumsLimit: 4,
+  // Hide "On rotation" when the last scrobble is older than this many days.
+  rotationMaxAgeDays: 14,
 };

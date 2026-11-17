@@ -9,6 +9,22 @@ tags:
   - building
   - learning
 permalink: /blog/my-most-expensive-lesson/
+motif:
+  name: scoreboard
+  event: Game 4
+  minutes: 24
+  periods: [Q3, Q4]
+  periodMinutes: 12
+  start: HALF
+  end: FINAL
+  a: { abbr: NYK, name: New York, from: 49, to: 107 }
+  b: { abbr: SAS, name: San Antonio, from: 76, to: 106 }
+  startNotes:
+    - "Knicks to win: 6%"
+    - The clock in the top bar runs as you read
+  endNotes:
+    - "Second half: 58-30"
+    - Brunson 36 · Anunoby 33
 ---
 
 The scoreboard read 49-76 at halftime.
@@ -17,21 +33,31 @@ Game 4 of the NBA Finals. The New York Knicks down 27 points to the San Antonio 
 
 I had three positions open. $20 on Jalen Brunson to score 35 or more points, taken at 22 cents on the dollar, because I'd watched this man all season and knew what he was capable of when it mattered. $20 on the Knicks to win, placed before tip-off. And another $40 on the Knicks at 6 cents on the dollar, added as the deficit grew. Not to chase a loss. Because I still believed, and the market was offering me $666 to be right about it.
 
+<figure class="ledger">
+<table>
+<tr><th>Position</th><th>Stake</th><th>Price</th></tr>
+<tr><td>Brunson, 35+ points</td><td>$20</td><td>22¢</td></tr>
+<tr><td>Knicks to win, before tip-off</td><td>$20</td><td>n/a</td></tr>
+<tr><td>Knicks to win, down 27</td><td>$40</td><td>6¢</td></tr>
+<tr><td>If held to the buzzer</td><td>$80 in</td><td>$794</td></tr>
+</table>
+</figure>
+
 $80 in. $794 waiting on the other side if I held.
 
 Here's what I felt in that moment, and I need you to understand it wasn't logic. It wasn't analytics. It was something closer to *recognition*. The feeling you get when you've seen enough of the world to know that the story isn't over just because it looks over.
 
-I believed.
+<p class="beat">I believed.</p>
 
 ---
 
 Then the room started talking.
 
-*"It's done."*
-
-*"You should cut your losses."*
-
-*"Bro, no team comes back from 27 down in the Finals. Be realistic."*
+<div class="room">
+<p>"It's done."</p>
+<p>"You should cut your losses."</p>
+<p>"Bro, no team comes back from 27 down in the Finals. Be realistic."</p>
+</div>
 
 And here's the part I'm still processing: I listened. Not all at once. Belief doesn't die in one blow, it bleeds out slowly. First I started *defending* my conviction instead of just *holding* it. Then I started running their numbers instead of my own. Then the doubt crept in, wearing the very reasonable disguise of "just being rational."
 
@@ -42,11 +68,11 @@ What I left on the table: $714.
 
 Ten minutes later, Jalen Brunson started doing something that can only be described as *refusing*. 36 points by the final buzzer. One more than the line I'd taken at 22 cents. OG Anunoby caught fire, 33 points, 7-of-9 from three, playing like a man who hadn't received the memo that this was supposed to be over. The Knicks outscored San Antonio 58-30 in the second half. They won 107-106.
 
-One. Point.
+<p class="beat">One. Point.</p>
 
 I watched the final buzzer go off and felt something I didn't expect: not joy. Not the sting of $714. Something quieter and more corrosive than either of those.
 
-*I had known.*
+<p class="beat"><em>I had known.</em></p>
 
 ---
 
@@ -94,7 +120,7 @@ That's the lesson I'm carrying out of Game 4.
 
 When you're building in the far tail of the distribution, when everyone around you can see exactly how unlikely your thing is, the room will always have data. It will always have precedent. It will almost always have the majority.
 
-Hold the line anyway.
+<p class="beat">Hold the line anyway.</p>
 
 Not because you're immune to being wrong. But because the things worth building have always looked, from the outside, exactly like the things that were never going to work.
 
@@ -102,4 +128,4 @@ The scoreboard said 49-76 at halftime.
 
 The final score was 107-106.
 
-Keep playing.
+<p class="beat">Keep playing.</p>

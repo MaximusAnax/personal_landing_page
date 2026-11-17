@@ -4,17 +4,17 @@ title: News
 description: Milestones and updates from Abdoul Ndiongue.
 permalink: /news/
 ---
-<section class="wrap page-intro">
-  <p class="eyebrow">News</p>
+<section class="page-intro">
+  <p class="mono">News</p>
   <h1>Milestones, newest first.</h1>
 </section>
-<section class="wrap">
-  <ol class="news-full">
+<section class="page-wrap">
+  <ol class="page-list timeline">
     {% for item in news | sortNews %}
     <li>
-      <span class="news-date">{{ item.date | newsDate }}</span>
+      <span class="mono">{{ item.date | newsDate }}</span>
       <div>
-        <p class="news-title">{% if item.link %}<a href="{{ item.link }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</p>
+        <p>{% if item.link %}<a href="{{ item.link }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</p>
         {% if item.text %}<p class="muted">{{ item.text | safe }}</p>{% endif %}
       </div>
     </li>

@@ -1,229 +1,194 @@
 ---
-layout: layouts/base.njk
+layout: layouts/home.njk
 permalink: /
-bodyClass: page page-home
+now:
+  - label: Researching
+    text: Why computer-use agents fail, with Prof. Matt Gormley
+  - label: Building
+    text: Orbit v2, an agent-native relationship memory
+  - label: Leading
+    text: CMU's Interfraternity Council
+consoleLines:
+  - Researching why computer-use agents fail.
+  - Building Orbit v2, an agent-native memory.
+  - President of CMU's Interfraternity Council.
+  - Building something with agents? Say hi →
 ---
-{% from "icons.njk" import icon %}
+<header class="head">
+  <a class="head__logo" href="#top" aria-label="{{ site.name }}, home"><svg class="logo" viewBox="0 0 44 32"><use href="#mono"/></svg></a>
+  <div class="head__console mono" aria-hidden="true"><span id="console" data-msgs="{{ consoleLines | dump }}">{{ consoleLines[0] }}</span></div>
+  <a class="head__nav" href="#work">Work</a>
+  <a class="head__nav d-only" href="#lab">Lab</a>
+  <a class="head__nav d-only" href="#writing">Writing</a>
+  <a class="head__nav" href="{{ site.resume }}">Resume</a>
+  <a class="head__icon d-only" href="{{ site.github }}" aria-label="GitHub">GH</a>
+  <a class="head__icon d-only" href="{{ site.linkedin }}" aria-label="LinkedIn">in</a>
+  <a class="head__cta" href="#contact">Say hi</a>
+</header>
 
-<section class="hero wrap" aria-labelledby="hero-title">
-  <div class="hero-text">
-    <p class="eyebrow">Carnegie Mellon · CS + AI · Class of '27</p>
-    <h1 id="hero-title">Abdoul<br />Ndiongue</h1>
-    <p class="lede">I build AI agents and the systems around them: the memory, evals and guardrails that make them dependable.</p>
-    <p class="hero-sub">
-      I research computer-use agents at CMU's Machine Learning Department and build my own agent systems on the side.
-      Previously a software engineer intern at Microsoft (Xbox). I grew up in the Bronx.
-    </p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#work">See the work {{ icon("down", 16) }}</a>
-      <a class="btn" href="{{ site.resume }}">{{ icon("file", 16) }} Resume</a>
-      <a class="btn" href="{{ site.github }}">{{ icon("github", 16) }} GitHub</a>
-      <a class="btn" href="mailto:{{ site.email }}">{{ icon("mail", 16) }} Email</a>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="hero__waves"><canvas id="waves" aria-hidden="true"></canvas></div>
+    <div class="sep sep--info"><b>▶</b><span>Carnegie Mellon · CS + AI · Class of '27</span><i class="grow"></i><span class="code" aria-hidden="true">1011010011010110</span><i></i><span>{{ site.location }}</span><b>◀</b></div>
+    <h1 class="hero__title"><span class="word w1">Abdoul</span><svg class="star" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 0c1 10 6 15 16 16-10 1-15 6-16 16-1-10-6-15-16-16C10 15 15 10 16 0z"/></svg><span class="word w2">Ndiongue</span></h1>
+    <div class="hero__lede">
+      <p>I build AI agents and the systems around them: the memory, evals and guardrails that make them dependable.</p>
+      <div class="hero__cta mono"><a class="btn btn--fill" href="#work">See the work ↓</a><a class="btn" href="{{ site.resume }}">Resume</a><a class="btn" href="#contact">Contact</a></div>
     </div>
-  </div>
-  <figure class="portrait">
-    <img src="/assets/img/portrait.jpg" width="598" height="820" alt="Abdoul in sunglasses holding a baby goat on a sunny day at Carnegie Mellon" fetchpriority="high" />
-  </figure>
-  <div class="now" aria-label="What I'm doing now">
-    <p class="now-label"><span class="pulse" aria-hidden="true"></span>Now</p>
-    <ul>
-      <li>Researching why computer-use agents fail, with Prof. Matt Gormley</li>
-      <li>Building Orbit v2, an agent-native relationship memory</li>
-      <li>President of CMU's Interfraternity Council</li>
-    </ul>
-  </div>
-</section>
+  </section>
 
-<section class="section wrap" id="work" aria-labelledby="work-title">
-  <header class="sec-head">
-    <span class="sec-num">01</span>
-    <h2 id="work-title">Selected work</h2>
-    <p>Agent systems first. For each project: what it does, how it's built, and how you can check it.</p>
-  </header>
+  <section class="about" id="about">
+    <div class="about__label mono"><span>About</span><em>Carnegie Mellon · CS + AI · Class of '27</em></div>
+    <div class="about__text">
+      <p>I research computer-use agents at CMU's Machine Learning Department and build my own agent systems on the side.</p>
+      <p>Previously a software engineer intern at Microsoft (Xbox). I grew up in the Bronx.</p>
+    </div>
+    <dl class="facts">
+      {%- for item in now %}
+      <div><dt class="mono">{{ item.label }}</dt><dd>{{ item.text }}</dd></div>
+      {%- endfor %}
+      <div><dt class="mono">Based in</dt><dd>{{ site.location }}</dd></div>
+    </dl>
+  </section>
 
-  <nav class="work-index" aria-label="Jump to a project">
-    {% for p in projects %}<a href="#{{ p.id }}">{{ p.title }}</a>{% endfor %}
-  </nav>
+  {# The tunnel: cards are real HTML so they exist without JS; home.js only moves them. #}
+  <section class="work" id="work" aria-label="Work">
+    <div class="work__pin">
+      <div class="work__ring"></div>
+      <div class="work__mask"><div class="work__scene" id="scene">
+        {%- for p in projects %}
+        <article class="card"><div class="card__art" aria-hidden="true"><b>{{ loop.index | pad2 }}</b><em>{{ p.status }}</em></div><h3>{{ p.title }}</h3><p class="card__dek">{{ p.tagline }}</p><p class="mono"><span>{{ p.kind }}</span><span>#an-00{{ loop.index | pad2 }}/{{ projects.length | pad2 }}</span></p></article>
+        {%- endfor %}
+      </div></div>
+      <p class="work__hint mono"><span>Keep scrolling</span></p>
+      <a class="work__skip mono" href="#index">Skip to the list ↓</a>
+    </div>
+  </section>
 
-  <div class="work-list">
-    {% for p in projects %}
-    <article class="work" id="{{ p.id }}">
-      <div class="work-meta">
-        <p class="work-kind">{{ p.kind }}</p>
-        <p class="work-years">{{ p.years }}</p>
-        {% if p.status %}<p class="badge">{{ p.status }}</p>{% endif %}
-      </div>
-      <div class="work-body">
-        <h3>{{ p.title }}</h3>
-        <p class="work-tagline">{{ p.tagline }}</p>
+  <div class="index" id="index" aria-label="Project index">
+    <div class="label mono"><span>Selected work</span><span>What it does, how it's built, how to check it</span></div>
+    {%- for p in projects %}
+    <details id="{{ p.id }}"{% if loop.first %} open{% endif %}>
+      <summary class="rowfx"><span class="mono">{{ loop.index | pad2 }}</span><strong>{{ p.title }}</strong><span class="mono">{{ p.status }}</span></summary>
+      <div class="index__body">
+        <p>{{ p.tagline }}</p>
         <p>{{ p.summary }}</p>
-
-        {% if p.versions %}
-        <ol class="versions swipe" data-swipe aria-label="Orbit versions">
-          {% for v in p.versions %}
-          <li>
-            <p class="v-tag">{{ v.tag }} · {{ v.name }}</p>
-            <p>{{ v.text }}</p>
-            <p class="v-links">
-              {% for l in v.links %}<a href="{{ l.href }}">{{ l.label }} {{ icon("arrow", 13) }}</a>{% endfor %}
-              {% if v.note %}<span class="muted">{{ v.note }}</span>{% endif %}
-            </p>
-          </li>
-          {% endfor %}
-        </ol>
-        <div class="swipe-dots" aria-hidden="true"></div>
-        {% endif %}
-
-        {% if p.points and p.points.length == 1 %}
-        <ul class="points">
-          <li>{{ p.points[0] }}</li>
-        </ul>
-        {% elif p.points and p.points.length %}
-        <details class="work-details" open>
-          <summary>How it works <span class="count">{{ p.points.length }}</span></summary>
-          <ul class="points">
-            {% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}
-          </ul>
-        </details>
-        {% endif %}
-
-        <ul class="chips" aria-label="Stack">
-          {% for s in p.stack %}<li>{{ s }}</li>{% endfor %}
-        </ul>
-
-        {% if (p.links and p.links.length) or p.note %}
-        <p class="work-links">
-          {% for l in p.links %}<a href="{{ l.href }}">{{ l.label }} {{ icon("arrow", 14) }}</a>{% endfor %}
-          {% if p.note %}<span class="muted">{{ p.note }}</span>{% endif %}
-        </p>
-        {% endif %}
+        {%- if p.points and p.points.length %}
+        <ul>{% for point in p.points %}<li>{{ point }}</li>{% endfor %}</ul>
+        {%- endif %}
+        {%- if p.versions %}
+        <div class="ver">
+          {%- for v in p.versions %}
+          <p><b>{{ v.tag }} · {{ v.name }}</b>{{ v.text }}{% for l in v.links %} <a href="{{ l.href }}">{{ l.label }} →</a>{% endfor %}{% if v.note %} <span class="mono">{{ v.note }}</span>{% endif %}</p>
+          {%- endfor %}
+        </div>
+        {%- endif %}
+        <p class="mono">{{ p.kind }} · {{ p.years }} · {{ p.stack | join(" · ") }}</p>
+        {%- if (p.links and p.links.length) or p.note %}
+        <p class="mono">{% for l in p.links %}<a href="{{ l.href }}">{{ l.label }} →</a>{% endfor %}{% if p.note %}<span>{{ p.note }}</span>{% endif %}</p>
+        {%- endif %}
       </div>
-    </article>
-    {% endfor %}
+    </details>
+    {%- endfor %}
   </div>
-</section>
 
-<section class="section wrap" id="lab" aria-labelledby="lab-title">
-  <header class="sec-head">
-    <span class="sec-num">02</span>
-    <h2 id="lab-title">The lab</h2>
-    <p>{{ lab.intro }}</p>
-  </header>
-  <p class="swipe-hint" aria-hidden="true">Swipe <span>→</span></p>
-  <div class="lab-grid swipe" data-swipe aria-label="Personal agent systems">
-    {% for item in lab.items %}
-    <article class="lab-card">
-      <h3>{{ item.name }}</h3>
-      <p>{{ item.text }}</p>
-      <ul class="chips chips-sm">{% for t in item.tags %}<li>{{ t }}</li>{% endfor %}</ul>
-    </article>
-    {% endfor %}
-  </div>
-  <div class="swipe-dots" aria-hidden="true"></div>
-  <div class="more-builds">
-    <p class="eyebrow">Also on GitHub</p>
-    <ul>
-      {% for m in lab.more %}
-      <li><a href="{{ m.href }}">{{ m.name }} {{ icon("arrow", 13) }}</a><span>{{ m.text }}</span></li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
+  <section class="xp" id="experience">
+    <div class="label mono"><span>Experience</span><a href="{{ site.resume }}">Resume (PDF) →</a></div>
+    {%- for r in experience.roles %}
+    <div class="xp__row rowfx"><span class="mono">{{ r.when }}</span><div><h3>{{ r.role }}</h3><span>{{ r.org }}</span></div><p>{{ r.text }}</p></div>
+    {%- endfor %}
+    <div class="xp__cols">
+      <div><h3 class="mono">Education</h3><ul><li><span>{{ experience.education.school }}</span><span class="mono">{{ experience.education.when }}</span></li><li>{{ experience.education.degree }}</li><li>{{ experience.education.honors }}</li></ul></div>
+      <div><h3 class="mono">Leadership</h3><ul>{% for l in experience.leadership %}<li><span>{{ l.role }}, {{ l.org }}</span><span class="mono">{{ l.when }}</span></li>{% endfor %}</ul></div>
+    </div>
+  </section>
 
-<section class="section wrap" id="experience" aria-labelledby="exp-title">
-  <header class="sec-head">
-    <span class="sec-num">03</span>
-    <h2 id="exp-title">Experience</h2>
-  </header>
-  <ol class="timeline">
-    {% for r in experience.roles %}
-    <li>
-      <p class="t-when">{{ r.when }}</p>
-      <div>
-        <h3>{{ r.role }}</h3>
-        <p class="t-org">{{ r.org }}</p>
-        <p>{{ r.text }}</p>
+  <section class="lab" id="lab">
+    <div class="lab__head">
+      <h2>The Lab</h2>
+      <p>{{ lab.intro }} <span class="mono">Drag →</span></p>
+    </div>
+    <div class="lab__rail" tabindex="0" aria-label="Lab systems, scroll sideways">
+      {%- for item in lab.items %}
+      <article class="rig">
+        <div class="rig__screen" aria-hidden="true">
+          {%- if item.visual == "captions" %}<div class="v-cap"><span>Every</span><span>word</span><span>lands</span><span>on</span><span>time</span></div>
+          {%- elif item.visual == "radar" %}<div class="v-radar"></div>
+          {%- elif item.visual == "pulse" %}<svg class="v-pulse" viewBox="0 0 200 60"><path pathLength="1" d="M0 32h38l8-20 10 38 8-28 6 10h42l8-20 10 38 8-28 6 10h56"/></svg>
+          {%- elif item.visual == "grade" %}<div class="v-grade"><i></i><span class="mono"><b>Floor</b><b>Now</b><b>Ceiling</b></span></div>
+          {%- else %}<span class="mono">{{ item.name }}</span>
+          {%- endif %}
+        </div>
+        <h3>{{ item.name }}</h3><p>{{ item.text }}</p><span class="mono">{{ item.tags | join(" · ") }}</span>
+      </article>
+      {%- endfor %}
+    </div>
+    <div class="lab__more">
+      {%- for item in lab.more %}
+      <a href="{{ item.href }}"><strong>{{ item.name }}</strong><span>{{ item.text }}</span></a>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <section class="wn" id="writing">
+    <div class="wn__writing">
+      <div class="label mono"><span>Writing</span><span>Notes on building and learning</span></div>
+      {%- for post in collections.posts | limit(3) %}
+      <a class="post rowfx" href="{{ post.url }}" aria-label="{{ post.data.title }}"><span class="mono">{{ post.date | readableDate }}</span><strong data-scramble>{{ post.data.title }}</strong>{% if post.data.description %}<p>{{ post.data.description | firstLine }}</p>{% endif %}</a>
+      {%- endfor %}
+      <a class="more mono" href="/blog/">All writing →</a>
+    </div>
+    <div class="wn__news">
+      <div class="label mono"><span>News</span><span>Newest first</span></div>
+      <ul class="news">
+        {%- for item in news | sortNews | limit(5) %}
+        <li><span class="mono">{{ item.date | newsDate }}</span><span>{{ item.title }}</span></li>
+        {%- endfor %}
+      </ul>
+      <a class="more mono" href="/news/">All news →</a>
+    </div>
+  </section>
+
+  {# Milestones fly out of the smiley; tiles are the ten newest news items. #}
+  <section class="way" id="way" aria-label="Shipping things since 2023">
+    <svg class="way__rays" aria-hidden="true"><path/></svg>
+    <div class="way__face" aria-hidden="true"><svg viewBox="0 0 90 90"><g class="eyes" fill="var(--ink)"><ellipse cx="33" cy="38" rx="5" ry="8"/><ellipse cx="57" cy="38" rx="5" ry="8"/></g><path d="M27 56c6 9 30 9 36 0" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/></svg></div>
+    <div class="way__objs" id="objs" aria-hidden="true">
+      {%- for item in news | sortNews | limit(10) %}
+      <div class="obj"><span>{{ item.date | newsDate }}</span><b>{{ item.short or item.title }}</b></div>
+      {%- endfor %}
+    </div>
+    <h2 class="way__text"><span>Shipping</span><span>Things</span><span>Since</span><span>2023</span></h2>
+    <p class="way__hint mono">Grab a milestone, let it go</p>
+  </section>
+
+  <section class="cta" id="contact">
+    <canvas id="grid" aria-hidden="true"></canvas>
+    <p class="cta__q"><span>Building something with agents?</span></p>
+    <div class="cta__hover">
+      <button class="cta__disc" type="button" id="go" aria-expanded="false" aria-label="Open contact"><span class="cta__go" aria-hidden="true">GO</span></button>
+      <div class="cta__big">
+        <strong>Let's<br>Talk</strong>
+        <div class="cta__mail"><code id="mail">{{ site.email }}</code><button type="button" id="copy">Copy</button></div>
       </div>
-    </li>
-    {% endfor %}
-  </ol>
+    </div>
+    <div class="cta__links mono">
+      <button type="button" data-copy="{{ site.email }}">{{ site.email }} · Copy</button>
+      <a href="mailto:{{ site.email }}">Email</a>
+      <a href="{{ site.github }}">GitHub</a>
+      <a href="{{ site.linkedin }}">LinkedIn</a>
+      <a href="{{ site.instagram }}">Instagram</a>
+      <a href="{{ site.resume }}">Resume (PDF)</a>
+      <a href="/abdoul-ndiongue.vcf">Save contact</a>
+      <button type="button" class="share-btn" data-share-title="{{ site.name }}" data-share-text="{{ site.name }}: AI agents and the systems around them" data-share-url="{{ site.url }}">Share</button>
+    </div>
+  </section>
+</main>
 
-  <div class="exp-grid">
-    <div class="exp-card">
-      <p class="eyebrow">Education</p>
-      <h3>{{ experience.education.school }}</h3>
-      <p>{{ experience.education.degree }} · {{ experience.education.when }}</p>
-      <p class="muted">{{ experience.education.courses }}</p>
-      <p class="muted">{{ experience.education.honors }}</p>
-    </div>
-    <div class="exp-card">
-      <p class="eyebrow">Leadership</p>
-      <ul class="lead-list">
-        {% for l in experience.leadership %}
-        <li><span>{{ l.role }}, {{ l.org }}</span><span class="muted">{{ l.when }}</span></li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section wrap" id="writing" aria-labelledby="writing-title">
-  <header class="sec-head">
-    <span class="sec-num">04</span>
-    <h2 id="writing-title">Writing &amp; news</h2>
-  </header>
-  <div class="split">
-    <div>
-      <p class="eyebrow">Writing</p>
-      <ul class="post-list">
-        {% for post in collections.posts | limit(3) %}
-        <li>
-          <a href="{{ post.url }}">
-            <span class="post-title">{{ post.data.title }}</span>
-            <span class="post-date">{{ post.date | readableDate }}</span>
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-      <a class="text-link" href="/blog/">All writing →</a>
-    </div>
-    <div>
-      <p class="eyebrow">News</p>
-      <ul class="news-list">
-        {% for item in news | sortNews | limit(5) %}
-        <li>
-          <span class="news-date">{{ item.date | newsDate }}</span>
-          <span>{% if item.link %}<a href="{{ item.link }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      <a class="text-link" href="/news/">All news →</a>
-    </div>
-  </div>
-</section>
-
-{% if lastfm.nowPlaying or (lastfm.topAlbums and lastfm.topAlbums.length) %}
-<section class="section wrap rotation" aria-labelledby="rot-title">
-  <header class="sec-head sec-head-inline">
-    <span class="sec-num">05</span>
-    <h2 id="rot-title">On rotation</h2>
-  </header>
-  <div class="rotation-row">
-    {% if lastfm.nowPlaying %}
-    <p class="np">
-      <span class="np-label">{% if lastfm.nowPlaying.isLive %}<span class="pulse" aria-hidden="true"></span>Now playing{% else %}Last played{% endif %}</span>
-      <span class="np-track">{{ lastfm.nowPlaying.track }}</span>
-      <span class="muted">{{ lastfm.nowPlaying.artist }}</span>
-    </p>
-    {% endif %}
-    {% if lastfm.topAlbums and lastfm.topAlbums.length %}
-    <ul class="albums" aria-label="Top albums lately">
-      {% for a in lastfm.topAlbums %}
-      <li><a href="{{ a.url }}" title="{{ a.title }} — {{ a.artist }}"><img src="{{ a.coverUrl }}" alt="{{ a.title }} by {{ a.artist }}" width="72" height="72" loading="lazy" /></a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    <a class="text-link" href="{{ lastfm.profileUrl }}">Last.fm →</a>
-  </div>
-</section>
-{% endif %}
+<footer class="foot">
+  <svg class="logo" viewBox="0 0 44 32" aria-hidden="true"><use href="#mono"/></svg>
+  {%- if lastfm.nowPlaying %}
+  <a class="foot__rot mono" href="{{ lastfm.profileUrl }}"><svg class="disc" viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="46" fill="var(--ink)"/><g fill="none" stroke="var(--paper)" stroke-width=".6" opacity=".55"><circle cx="46" cy="46" r="40"/><circle cx="46" cy="46" r="33"/><circle cx="46" cy="46" r="26"/></g><circle cx="46" cy="46" r="15" fill="var(--paper)"/><path d="M46 33v8" stroke="var(--ink)" stroke-width="3"/><circle cx="46" cy="46" r="2.5" fill="var(--ink)"/></svg><span>On rotation: {{ lastfm.nowPlaying.track }} · {{ lastfm.nowPlaying.artist }}</span></a>
+  {%- endif %}
+  <span class="mono">© {{ build.year }} {{ site.name }} · {{ site.location }}</span>
+</footer>

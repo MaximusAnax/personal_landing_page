@@ -1,13 +1,34 @@
+{# Reading shell: posts, writing index, news, 404. The home page uses layouts/home.njk. #}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     {% include "head.njk" %}
   </head>
   <body class="{{ bodyClass or 'page' }}">
-    {% include "header.njk" %}
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="bar" id="bar">
+      <div class="bar__in">
+        <a href="/" aria-label="{{ site.name }}, home"><svg viewBox="0 0 44 32" aria-hidden="true"><path d="M3 30V2h13v28M3 18h13M27 30V2l14 28V2"/></svg></a>
+        {%- if isPost %}
+        <a class="mono" href="/blog/">← Writing</a>
+        <span class="bar__title" id="barTitle">{{ title }}</span>
+        <span class="inst mono" id="inst" aria-hidden="true"></span>
+        {%- else %}
+        <span class="bar__title"></span>
+        <a class="mono" href="/#work">Work</a>
+        <a class="mono" href="/blog/">Writing</a>
+        <a class="mono" href="{{ site.resume }}">Resume</a>
+        {%- endif %}
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="half"/></svg></button>
+      </div>
+      {%- if isPost %}<div class="bar__line"></div>{% endif %}
+    </div>
     <main id="main">
       {{ content | safe }}
     </main>
-    {% include "footer.njk" %}
+    <footer class="sign mono page-foot">
+      <span>© {{ build.year }} {{ site.name }} · {{ site.location }}</span>
+      <a href="/#contact">Building something with agents? Say hi →</a>
+    </footer>
   </body>
 </html>

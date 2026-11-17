@@ -34,6 +34,25 @@ module.exports = function (eleventyConfig) {
     Array.isArray(array) ? array.slice(0, n) : []
   );
 
+  eleventyConfig.addFilter("pad2", (n) => String(n).padStart(2, "0"));
+
+  eleventyConfig.addFilter("firstLine", (value) =>
+    value ? String(value).trim().split(/\r?\n/)[0] : ""
+  );
+
+  // Reading time from rendered HTML, at about 230 words a minute.
+  eleventyConfig.addFilter("readTime", (html) => {
+    const words = String(html || "").replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 230));
+  });
+
+  // The next older post, wrapping to the newest. Null when there is only one post.
+  eleventyConfig.addFilter("nextPost", (posts, url) => {
+    if (!Array.isArray(posts) || posts.length < 2) return null;
+    const i = posts.findIndex((p) => p.url === url);
+    return posts[(i + 1) % posts.length];
+  });
+
   eleventyConfig.addFilter("nl2br", (value) =>
     value ? String(value).replace(/\r?\n/g, "<br />") : ""
   );

@@ -1,3 +1,4 @@
+// `visual` picks the small animated readout on the home page lab card (captions, radar, pulse, grade).
 // Personal agent systems I run day to day. Private (they touch my own data); described here, not linked.
 module.exports = {
   intro:
@@ -5,21 +6,25 @@ module.exports = {
   items: [
     {
       name: "Clip Desk",
+      visual: "captions",
       text: "Turns raw footage into vertical shorts with word-timed captions (faster-whisper), hooks and speaker tags. Long renders run in resumable chunks.",
       tags: ["Video", "Whisper", "Pipelines"],
     },
     {
       name: "Role Radar",
+      visual: "radar",
       text: "Watches about 170 companies' hiring systems, 127 job boards and 8 GitHub job lists. It ranks new roles and sends a daily email digest, using public data only.",
       tags: ["Crawling", "Ranking", "Automation"],
     },
     {
       name: "Whoop Sync",
+      visual: "pulse",
       text: "Mirrors sleep and workouts from the Whoop API into Google Calendar through read-only OAuth, and never creates duplicates.",
       tags: ["OAuth", "Sync", "Calendar"],
     },
     {
       name: "Grade Outlook",
+      visual: "grade",
       text: "Pulls Canvas and Gradescope and works out each course's current grade, floor, ceiling and the score still needed. Two independent implementations cross-check each other.",
       tags: ["APIs", "Verification"],
     },

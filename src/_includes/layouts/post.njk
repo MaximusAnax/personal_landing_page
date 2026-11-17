@@ -1,15 +1,35 @@
 ---
 layout: layouts/base.njk
 bodyClass: page page-post
+isPost: true
 ---
-<article class="wrap post">
-  <a class="back" href="/blog/">← All writing</a>
-  <header class="post-header">
-    {% if date %}<p class="eyebrow"><time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time></p>{% endif %}
-    <h1>{{ title }}</h1>
-    {% if description %}<p class="post-dek">{{ description | nl2br | safe }}</p>{% endif %}
-  </header>
-  <div class="prose">
-    {{ content | safe }}
+{#
+  One reading template for every post. A post may opt into ONE motif in its front matter:
+
+    motif:
+      name: scoreboard        # a file in src/_includes/motifs/ and assets/js/motifs/
+      ...settings for that motif
+
+  The motif include is rendered twice: slot "panel" under the title, slot "closing" after the prose.
+  Posts without a motif get the plain template. See .claude/skills/new-post/SKILL.md.
+#}
+<article class="post"{% if motif %} data-motif="{{ motif.name }}" data-motif-config="{{ motif | dump }}"{% endif %}>
+  <div class="col">
+    <header>
+      <p class="meta mono">{% if date %}<time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time>{% endif %}<span>{{ content | readTime }} min read</span></p>
+      <h1>{{ title }}</h1>
+      {% if description %}<p class="dek">{{ description | nl2br | safe }}</p>{% endif %}
+    </header>
+    {%- if motif %}{% set slot = "panel" %}{% include "motifs/" + motif.name + ".njk" %}{% endif %}
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+    {%- if motif %}{% set slot = "closing" %}{% include "motifs/" + motif.name + ".njk" %}{% endif %}
   </div>
+  {%- set nxt = collections.posts | nextPost(page.url) %}
+  {%- if nxt %}
+  <div class="end">
+    <a class="next" href="{{ nxt.url }}"><span class="mono">Keep reading</span><strong>{{ nxt.data.title }}</strong>{% if nxt.data.description %}<span>{{ nxt.data.description | firstLine }}</span>{% endif %}</a>
+  </div>
+  {%- endif %}
 </article>

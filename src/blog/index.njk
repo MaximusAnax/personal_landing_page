@@ -4,18 +4,18 @@ title: Writing
 description: Notes on building, learning, and engineering by Abdoul Ndiongue.
 permalink: /blog/
 ---
-<section class="wrap page-intro">
-  <p class="eyebrow">Writing</p>
+<section class="page-intro">
+  <p class="mono">Writing</p>
   <h1>Notes on building and learning.</h1>
 </section>
-<section class="wrap">
-  <ul class="post-list post-list-lg">
+<section class="page-wrap">
+  <ul class="page-list">
     {% for post in collections.posts %}
     <li>
-      <a href="{{ post.url }}">
-        <span class="post-title">{{ post.data.title }}</span>
-        <span class="post-date">{{ post.date | readableDate }}</span>
-        {% if post.data.description %}<span class="post-desc">{{ post.data.description | nl2br | safe }}</span>{% endif %}
+      <a class="next" href="{{ post.url }}">
+        <span class="mono">{{ post.date | readableDate }}</span>
+        <strong>{{ post.data.title }}</strong>
+        {% if post.data.description %}<p>{{ post.data.description | nl2br | safe }}</p>{% endif %}
       </a>
     </li>
     {% else %}

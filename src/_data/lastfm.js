@@ -134,6 +134,16 @@ module.exports = async function () {
 
     let nowPlaying = null;
 
+    // A track that is not playing right now carries the time it was scrobbled.
+    // If that is older than the limit, scrobbling has probably stopped: show nothing rather than a stale song.
+    const playedAt = current?.date?.uts ? Number(current.date.uts) * 1000 : null;
+    const maxAgeMs = (site.rotationMaxAgeDays || 14) * 24 * 60 * 60 * 1000;
+    if (current && !isLive && playedAt && Date.now() - playedAt > maxAgeMs) {
+      const days = Math.floor((Date.now() - playedAt) / 86400000);
+      console.warn(`[lastfm] last play was ${days} days ago; hiding "On rotation"`);
+      current = null;
+    }
+
     if (current) {
       const artist = artistName(current.artist);
       let coverUrl = resolveTrackCover(current, topAlbums);

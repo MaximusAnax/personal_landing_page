@@ -1,0 +1,18 @@
+---
+shell: home
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "head.njk" %}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mono" viewBox="0 0 44 32"><path pathLength="1" d="M3 30V2h13v28M3 18h13"/><path pathLength="1" d="M27 30V2l14 28V2"/></symbol></svg>
+    <div class="intro" id="intro" aria-hidden="true"><svg class="logo" viewBox="0 0 44 32"><use href="#mono"/></svg></div>
+    <div class="site">
+      {{ content | safe }}
+    </div>
+    <p class="toast" role="status" aria-live="polite"></p>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{#
+  Motif: scoreboard. For a story with two sides and a score that changes between a start and an end.
+  Reading progress runs the clock from `start` to `end`; the live score shows in the top bar.
+
+  Front matter:
+    motif:
+      name: scoreboard
+      event: Game 4                      # small label under the clock
+      minutes: 24                        # game time that reading covers
+      periods: [Q3, Q4]                  # equal slices of `minutes`
+      periodMinutes: 12
+      start: HALF                        # clock label at 0%
+      end: FINAL                         # clock label at 100%
+      a: { abbr: NYK, name: New York, from: 49, to: 107 }
+      b: { abbr: SAS, name: San Antonio, from: 76, to: 106 }
+      startNotes: [...]                  # up to two captions under the opening board
+      endNotes: [...]                    # up to two captions under the closing board
+  Every number must come from the post itself.
+#}
+{%- set isEnd = (slot == "closing") %}
+{%- set sa = motif.a.to if isEnd else motif.a.from %}
+{%- set sb = motif.b.to if isEnd else motif.b.from %}
+{%- set notes = motif.endNotes if isEnd else motif.startNotes %}
+<figure class="panel{% if isEnd %} panel--closing{% endif %}" aria-label="{{ motif.end if isEnd else motif.start }}: {{ motif.a.name }} {{ sa }}, {{ motif.b.name }} {{ sb }}">
+  <div class="board">
+    <div{% if sa > sb %} class="win"{% endif %}><strong>{{ sa }}</strong><span class="mono">{{ motif.a.name }}</span></div>
+    <i><b>{{ motif.end if isEnd else motif.start }}</b><span class="mono">{{ motif.event }}</span></i>
+    <div{% if sb > sa %} class="win"{% endif %}><strong>{{ sb }}</strong><span class="mono">{{ motif.b.name }}</span></div>
+  </div>
+  {%- if notes %}
+  <figcaption class="mono">{% for n in notes %}<span>{{ n }}</span>{% endfor %}</figcaption>
+  {%- endif %}
+</figure>

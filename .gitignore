@@ -2,4 +2,6 @@ node_modules/
 _site/
 .DS_Store
 .env
-.claude/
+# Local Claude settings stay out of git; shared project skills are tracked.
+.claude/*
+!.claude/skills/

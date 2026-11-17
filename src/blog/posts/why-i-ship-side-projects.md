@@ -7,6 +7,9 @@ tags:
   - building
   - learning
 permalink: /blog/why-i-ship-side-projects/
+motif:
+  name: maze
+  caption: A fresh depth-first maze, like the first thing I shipped. It solves as you read.
 ---
 
 Side projects are not distractions from school or work. For me, they are the fastest way to learn what I actually care about building.
