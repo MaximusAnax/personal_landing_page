@@ -23,8 +23,24 @@ consoleLines:
   <a class="head__nav" href="{{ site.resume }}">Resume</a>
   <a class="head__icon d-only" href="{{ site.github }}" aria-label="GitHub">GH</a>
   <a class="head__icon d-only" href="{{ site.linkedin }}" aria-label="LinkedIn">in</a>
-  <a class="head__cta" href="#contact">Say hi</a>
+  <button class="head__cta" type="button" data-contact aria-expanded="false" aria-controls="contact-panel">Say hi</button>
 </header>
+
+{% macro contactLinks() %}
+  <a href="{{ site.github }}">GitHub</a>
+  <a href="{{ site.linkedin }}">LinkedIn</a>
+  <a href="{{ site.instagram }}">Instagram</a>
+  <a href="{{ site.resume }}">Resume (PDF)</a>
+  <a href="/abdoul-ndiongue.vcf">Save contact</a>
+  <button type="button" class="share-btn" data-share-title="{{ site.name }}" data-share-text="{{ site.name }}: AI agents and the systems around them" data-share-url="{{ site.url }}">Share</button>
+{% endmacro %}
+
+{# Contact, one tap away from anywhere on the page. The same details sit in the footer for anyone without JS. #}
+<aside class="contact" id="contact-panel" aria-label="Contact" hidden>
+  <p class="contact__q">Building something with agents?</p>
+  <div class="chips mono"><a class="chip--mail" href="mailto:{{ site.email }}">{{ site.email }}</a><button type="button" data-copy="{{ site.email }}">Copy</button></div>
+  <div class="chips mono">{{ contactLinks() }}</div>
+</aside>
 
 <main id="main">
   <section class="hero" id="top">
@@ -33,15 +49,19 @@ consoleLines:
     <h1 class="hero__title"><span class="word w1">Abdoul</span><svg class="star" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 0c1 10 6 15 16 16-10 1-15 6-16 16-1-10-6-15-16-16C10 15 15 10 16 0z"/></svg><span class="word w2">Ndiongue</span></h1>
     <div class="hero__lede">
       <p>I build AI agents and the systems around them: the memory, evals and guardrails that make them dependable.</p>
-      <div class="hero__cta mono"><a class="btn btn--fill" href="#work">See the work ↓</a><a class="btn" href="{{ site.resume }}">Resume</a><a class="btn" href="#contact">Contact</a></div>
+      <div class="hero__cta mono"><a class="btn btn--fill" href="#work">See the work ↓</a><a class="btn" href="{{ site.resume }}">Resume</a><button class="btn" type="button" data-contact>Contact</button></div>
     </div>
   </section>
 
+  {# About: photo first, then the short introduction, then the "now" strip. Experience follows directly. #}
   <section class="about" id="about">
-    <div class="about__label mono"><span>About</span><em>Carnegie Mellon · CS + AI · Class of '27</em></div>
+    <div class="about__label mono"><span>About</span><span>Bronx, NY → {{ site.location }}</span></div>
+    <figure class="portrait duo"><img src="{{ photos.portrait.src }}" alt="{{ photos.portrait.alt }}" width="598" height="820" /></figure>
     <div class="about__text">
-      <p>I research computer-use agents at CMU's Machine Learning Department and build my own agent systems on the side.</p>
-      <p>Previously a software engineer intern at Microsoft (Xbox). I grew up in the Bronx.</p>
+      <p class="about__lead">I grew up in the Bronx, and I found out what I like doing behind the counter at Shake Shack.</p>
+      <p>I worked there thirty hours a week in high school. About twenty of us shared one cramped kitchen, orders got lost in the noise, and everyone was irritable. I was having a great time, because every jam was a system I could redesign in my head. I still look at things that way: everything could be worse, so everything could be better.</p>
+      <p>Now the systems are AI agents. I research why computer-use agents fail at CMU's Machine Learning Department, build my own agent systems on the side, and spent a summer at Microsoft on Xbox. I have been the long shot in most rooms I've walked into. I'm the comeback that hasn't finished yet.</p>
+      <p class="about__motto mono">I solve, therefore I am.</p>
     </div>
     <dl class="facts">
       {%- for item in now %}
@@ -51,13 +71,24 @@ consoleLines:
     </dl>
   </section>
 
+  <section class="xp" id="experience">
+    <div class="label mono"><span>Experience</span><a href="{{ site.resume }}">Resume (PDF) →</a></div>
+    {%- for r in experience.roles %}
+    <div class="xp__row rowfx"><span class="mono">{{ r.when }}</span><div><h3>{{ r.role }}</h3><span>{{ r.org }}</span></div><p>{{ r.text }}</p></div>
+    {%- endfor %}
+    <div class="xp__cols">
+      <div><h3 class="mono">Education</h3><ul><li><span>{{ experience.education.school }}</span><span class="mono">{{ experience.education.when }}</span></li><li>{{ experience.education.degree }}</li><li>{{ experience.education.honors }}</li></ul></div>
+      <div><h3 class="mono">Leadership</h3><ul>{% for l in experience.leadership %}<li><span>{{ l.role }}, {{ l.org }}</span><span class="mono">{{ l.when }}</span></li>{% endfor %}</ul></div>
+    </div>
+  </section>
+
   {# The tunnel: cards are real HTML so they exist without JS; home.js only moves them. #}
   <section class="work" id="work" aria-label="Work">
     <div class="work__pin">
       <div class="work__ring"></div>
       <div class="work__mask"><div class="work__scene" id="scene">
         {%- for p in projects %}
-        <article class="card"><div class="card__art" aria-hidden="true"><b>{{ loop.index | pad2 }}</b><em>{{ p.status }}</em></div><h3>{{ p.title }}</h3><p class="card__dek">{{ p.tagline }}</p><p class="mono"><span>{{ p.kind }}</span><span>#an-00{{ loop.index | pad2 }}/{{ projects.length | pad2 }}</span></p></article>
+        <article class="card"><div class="card__art{% if p.image %} duo{% endif %}">{% if p.image %}<img src="{{ p.image.src }}" alt="{{ p.image.alt }}" loading="lazy" />{% elif p.art %}{% include "art/" + p.art + ".svg" %}{% endif %}<b aria-hidden="true">{{ loop.index | pad2 }}</b><em>{{ p.status }}</em></div><h3>{{ p.title }}</h3><p class="card__dek">{{ p.tagline }}</p><p class="mono"><span>{{ p.kind }}</span><span>#an-00{{ loop.index | pad2 }}/{{ projects.length | pad2 }}</span></p></article>
         {%- endfor %}
       </div></div>
       <p class="work__hint mono"><span>Keep scrolling</span></p>
@@ -73,6 +104,9 @@ consoleLines:
       <div class="index__body">
         <p>{{ p.tagline }}</p>
         <p>{{ p.summary }}</p>
+        {%- if p.image %}
+        <figure class="index__photo duo"><img src="{{ p.image.src }}" alt="{{ p.image.alt }}" loading="lazy" /></figure>
+        {%- endif %}
         {%- if p.points and p.points.length %}
         <ul>{% for point in p.points %}<li>{{ point }}</li>{% endfor %}</ul>
         {%- endif %}
@@ -91,17 +125,6 @@ consoleLines:
     </details>
     {%- endfor %}
   </div>
-
-  <section class="xp" id="experience">
-    <div class="label mono"><span>Experience</span><a href="{{ site.resume }}">Resume (PDF) →</a></div>
-    {%- for r in experience.roles %}
-    <div class="xp__row rowfx"><span class="mono">{{ r.when }}</span><div><h3>{{ r.role }}</h3><span>{{ r.org }}</span></div><p>{{ r.text }}</p></div>
-    {%- endfor %}
-    <div class="xp__cols">
-      <div><h3 class="mono">Education</h3><ul><li><span>{{ experience.education.school }}</span><span class="mono">{{ experience.education.when }}</span></li><li>{{ experience.education.degree }}</li><li>{{ experience.education.honors }}</li></ul></div>
-      <div><h3 class="mono">Leadership</h3><ul>{% for l in experience.leadership %}<li><span>{{ l.role }}, {{ l.org }}</span><span class="mono">{{ l.when }}</span></li>{% endfor %}</ul></div>
-    </div>
-  </section>
 
   <section class="lab" id="lab">
     <div class="lab__head">
@@ -149,46 +172,35 @@ consoleLines:
     </div>
   </section>
 
-  {# Milestones fly out of the smiley; tiles are the ten newest news items. #}
+  {# Milestones and photos fly out of the smiley: the ten newest news items plus photos.tiles. #}
   <section class="way" id="way" aria-label="Shipping things since 2023">
     <svg class="way__rays" aria-hidden="true"><path/></svg>
     <div class="way__face" aria-hidden="true"><svg viewBox="0 0 90 90"><g class="eyes" fill="var(--ink)"><ellipse cx="33" cy="38" rx="5" ry="8"/><ellipse cx="57" cy="38" rx="5" ry="8"/></g><path d="M27 56c6 9 30 9 36 0" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/></svg></div>
     <div class="way__objs" id="objs" aria-hidden="true">
       {%- for item in news | sortNews | limit(10) %}
       <div class="obj"><span>{{ item.date | newsDate }}</span><b>{{ item.short or item.title }}</b></div>
+      {%- set ph = photos.tiles[(loop.index0 - 1) / 2] if loop.index0 % 2 == 1 else null %}
+      {%- if ph %}
+      <div class="obj obj--photo duo"><img src="{{ ph.src }}" alt="" loading="lazy" draggable="false" /><span>{{ ph.caption }}</span></div>
+      {%- endif %}
       {%- endfor %}
     </div>
     <h2 class="way__text"><span>Shipping</span><span>Things</span><span>Since</span><span>2023</span></h2>
-    <p class="way__hint mono">Grab a milestone, let it go</p>
-  </section>
-
-  <section class="cta" id="contact">
-    <canvas id="grid" aria-hidden="true"></canvas>
-    <p class="cta__q"><span>Building something with agents?</span></p>
-    <div class="cta__hover">
-      <button class="cta__disc" type="button" id="go" aria-expanded="false" aria-label="Open contact"><span class="cta__go" aria-hidden="true">GO</span></button>
-      <div class="cta__big">
-        <strong>Let's<br>Talk</strong>
-        <div class="cta__mail"><code id="mail">{{ site.email }}</code><button type="button" id="copy">Copy</button></div>
-      </div>
-    </div>
-    <div class="cta__links mono">
-      <button type="button" data-copy="{{ site.email }}">{{ site.email }} · Copy</button>
-      <a href="mailto:{{ site.email }}">Email</a>
-      <a href="{{ site.github }}">GitHub</a>
-      <a href="{{ site.linkedin }}">LinkedIn</a>
-      <a href="{{ site.instagram }}">Instagram</a>
-      <a href="{{ site.resume }}">Resume (PDF)</a>
-      <a href="/abdoul-ndiongue.vcf">Save contact</a>
-      <button type="button" class="share-btn" data-share-title="{{ site.name }}" data-share-text="{{ site.name }}: AI agents and the systems around them" data-share-url="{{ site.url }}">Share</button>
-    </div>
+    <p class="way__hint mono">Grab one, let it go</p>
   </section>
 </main>
 
-<footer class="foot">
+<footer class="foot" id="contact">
+  <div class="foot__contact">
+    <p>Building something with agents?</p>
+    <h2><a href="mailto:{{ site.email }}">Let's talk.</a></h2>
+    <div class="chips mono"><a class="chip--mail" href="mailto:{{ site.email }}">{{ site.email }}</a><button type="button" data-copy="{{ site.email }}">Copy</button>{{ contactLinks() }}</div>
+  </div>
+  <div class="foot__bar">
   <svg class="logo" viewBox="0 0 44 32" aria-hidden="true"><use href="#mono"/></svg>
   {%- if lastfm.nowPlaying %}
   <a class="foot__rot mono" href="{{ lastfm.profileUrl }}"><svg class="disc" viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="46" fill="var(--ink)"/><g fill="none" stroke="var(--paper)" stroke-width=".6" opacity=".55"><circle cx="46" cy="46" r="40"/><circle cx="46" cy="46" r="33"/><circle cx="46" cy="46" r="26"/></g><circle cx="46" cy="46" r="15" fill="var(--paper)"/><path d="M46 33v8" stroke="var(--ink)" stroke-width="3"/><circle cx="46" cy="46" r="2.5" fill="var(--ink)"/></svg><span>On rotation: {{ lastfm.nowPlaying.track }} · {{ lastfm.nowPlaying.artist }}</span></a>
   {%- endif %}
   <span class="mono">© {{ build.year }} {{ site.name }} · {{ site.location }}</span>
+  </div>
 </footer>

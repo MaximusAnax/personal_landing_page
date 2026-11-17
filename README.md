@@ -21,6 +21,8 @@ Requires Node 20+.
 | Personal agent systems ("The lab") | `src/_data/lab.js` |
 | Experience, leadership, education | `src/_data/experience.js` |
 | News items | `src/_data/news.js` |
+| Personal photos (portrait, flying tiles) | `src/_data/photos.js`, files in `assets/img/` |
+| Project depictions on the work cards | `image` or `art` in `projects.js`; drawings live in `src/_includes/art/*.svg` |
 | Blog posts | `src/blog/posts/*.md` |
 | Homepage template | `src/index.njk` |
 | Home page layout, styles, interactions | `src/_includes/layouts/home.njk`, `assets/css/home.css`, `assets/js/home.js` |

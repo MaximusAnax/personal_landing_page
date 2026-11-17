@@ -1,9 +1,12 @@
 // Selected work, in display order. Keep every claim checkable against the linked code.
+// Each project shows one depiction on its home page card: `image` (a real photo: { src, alt })
+// or `art` (the name of a line drawing in src/_includes/art/<name>.svg). With neither, the card shows its number only.
 const gh = (repo) => `https://github.com/MaximusAnax/${repo}`;
 
 module.exports = [
   {
     id: "cua",
+    art: "cua",
     title: "Computer-use agents",
     kind: "Research · CMU Machine Learning Dept.",
     years: "2026 –",
@@ -22,6 +25,7 @@ module.exports = [
   },
   {
     id: "orbit",
+    art: "orbit",
     title: "Orbit",
     kind: "Agent memory",
     years: "2026",
@@ -57,6 +61,7 @@ module.exports = [
   },
   {
     id: "traceback",
+    art: "traceback",
     title: "TraceBack",
     kind: "Autonomous maintenance",
     years: "2026",
@@ -77,6 +82,10 @@ module.exports = [
   },
   {
     id: "terrabot",
+    image: {
+      src: "/assets/img/work/terrabot.jpg",
+      alt: "Radish and lettuce seedlings under the TerraBot's LED panel on day 14 of the grow",
+    },
     title: "TerraBot greenhouse agent",
     kind: "Autonomous agents · CMU 15-482",
     years: "2026",
@@ -96,6 +105,7 @@ module.exports = [
   },
   {
     id: "hirevault",
+    art: "hirevault",
     title: "HireVault",
     kind: "Full-stack product",
     years: "2026",
@@ -109,6 +119,7 @@ module.exports = [
   },
   {
     id: "contract-clarity",
+    art: "contract-clarity",
     title: "Contract Clarity",
     kind: "LLM product",
     years: "2026",
@@ -122,6 +133,7 @@ module.exports = [
   },
   {
     id: "portfolio-optimizer",
+    art: "portfolio-optimizer",
     title: "Regime-switching portfolio optimizer",
     kind: "Quant",
     years: "2024 –",

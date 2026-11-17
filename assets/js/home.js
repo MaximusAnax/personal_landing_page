@@ -209,42 +209,14 @@ if (!reduce) setInterval(() => codes.forEach(c => { c.textContent = [...c.textCo
   addTicker(sec, tick);
 }
 
-/* cta */
+/* contact panel: opens under the header from any [data-contact] button */
 {
-  const sec = $('#contact'), cv = $('#grid'), ctx = cv.getContext('2d'), hover = $('.cta__hover'), disc = $('#go'), go = $('.cta__go');
-  let W = 0, H = 0, dpr = 1, cols = [], D = 500, op = 0, open = false, last = 0, shock = 0; const wave = { r: 1e9, speed: 14, k: 1 };
-  const size = () => {
-    const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(devicePixelRatio || 1, 2); cv.width = W * dpr; cv.height = H * dpr;
-    D = Math.max(240, Math.min(W - 48, H - 200)); sec.style.setProperty('--D', D + 'px'); sec.style.setProperty('--s', 96 / D);
-    const nx = W > 767 ? 12 : 8, ny = 8; cols = [];
-    for (let i = 0; i <= nx; i++) { const col = []; for (let j = 0; j <= ny; j++) { const x = W / nx * i, y = H / ny * j, dx = x - W / 2, dy = y - H / 2, dist = Math.hypot(dx, dy); col.push({ x, y, dist, ux: dist ? dx / dist : 0, uy: dist ? dy / dist : 0, ox: 0, oy: 0, vx: 0, vy: 0, fixed: !i || !j || i === nx || j === ny }); } cols.push(col); }
-  };
-  const setOpen = v => { if (open === v) return; open = v; sec.classList.toggle('is-open', v); disc.setAttribute('aria-expanded', v); clearTimeout(shock); if (v) shock = setTimeout(() => { wave.r = 0; wave.speed = 28; wave.k = 3.5; }, 450); };
-  disc.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') setOpen(true); });
-  hover.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') setOpen(false); });
-  disc.addEventListener('click', e => { if (e.detail === 0 || !matchMedia('(hover:hover)').matches) setOpen(!open); else setOpen(true); });
-  $('#copy').addEventListener('click', e => {
-    const b = e.currentTarget, txt = $('#mail').textContent, done = () => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy'; }, 1400); };
-    const sel = () => { const r = document.createRange(); r.selectNodeContents($('#mail')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; };
-    try { navigator.clipboard.writeText(txt).then(done, sel); } catch (err) { sel(); }
-  });
-  const X = p => p.x + p.ox + p.ux * p.b, Y = p => p.y + p.oy + p.uy * p.b;
-  const tick = t => {
-    if (!open && t - last > 3200) { last = t; wave.r = 0; wave.speed = W > 767 ? 14 : 10; wave.k = W > 767 ? 1 : .5; }
-    const ph = clamp((t - last) / 3200, 0, 1); go.style.transform = `scale(${open ? 1 : .85 + .2 * ph * ph})`;
-    wave.r += wave.speed; op += ((open ? 1 : 0) - op) * .07;
-    for (const col of cols) for (const p of col) {
-      if (p.fixed) { p.b = 0; continue; }
-      const band = Math.abs(p.dist - wave.r); if (band < 40) { const k = (1 - band / 40) * wave.k * 2.2; p.vx += p.ux * k; p.vy += p.uy * k; }
-      p.vx += -p.ox * .02; p.vy += -p.oy * .02; p.vx *= .88; p.vy *= .88; p.ox += p.vx; p.oy += p.vy;
-      p.b = op * D * .5 * Math.exp(-p.dist / (D * .5));
-    }
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H); ctx.strokeStyle = C.ink; ctx.lineWidth = 1; ctx.beginPath();
-    for (const col of cols) col.forEach((p, j) => j ? ctx.lineTo(X(p), Y(p)) : ctx.moveTo(X(p), Y(p)));
-    for (let j = 0; j < cols[0].length; j++) cols.forEach((col, i) => i ? ctx.lineTo(X(col[j]), Y(col[j])) : ctx.moveTo(X(col[j]), Y(col[j])));
-    ctx.stroke();
-  };
-  resizers.push(size); addTicker(sec, tick);
+  const panel = $('#contact-panel'), head = $('.head'), btns = $$('[data-contact]');
+  const set = open => { panel.hidden = !open; btns.forEach(b => b.setAttribute('aria-expanded', open)); if (open) panel.style.top = Math.max(0, head.getBoundingClientRect().bottom) + 'px'; };
+  btns.forEach(b => b.addEventListener('click', e => { e.stopPropagation(); set(panel.hidden); }));
+  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target)) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { set(false); btns[0].focus(); } });
+  addEventListener('scroll', () => { if (!panel.hidden) panel.style.top = Math.max(0, head.getBoundingClientRect().bottom) + 'px'; }, { passive: true });
 }
 
 /* share: native sheet when available, otherwise copy the link */
