@@ -81,7 +81,7 @@ consoleLines:
   </div>
 
   <section class="xp" id="experience">
-    <div class="label mono"><span>Experience</span><a href="{{ site.resume }}">Resume (PDF) →</a></div>
+    <div class="xp__head"><h2>Experience</h2><a class="mono" href="{{ site.resume }}">Resume (PDF) →</a></div>
     {%- for r in experience.roles %}
     <div class="xp__row rowfx"><span class="mono">{{ r.when }}</span><div><h3>{{ r.role }}</h3><span>{{ r.org }}</span></div><p>{{ r.text }}</p></div>
     {%- endfor %}
