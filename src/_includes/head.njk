@@ -44,12 +44,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" />
 {%- if shell == "home" %}
-<link rel="stylesheet" href="/assets/css/home.css" />
-<script src="/assets/js/home.js" defer></script>
+<link rel="stylesheet" href="{{ '/assets/css/home.css' | asset }}" />
+<script src="{{ '/assets/js/home.js' | asset }}" defer></script>
 {%- else %}
-<link rel="stylesheet" href="/assets/css/reader.css" />
+<link rel="stylesheet" href="{{ '/assets/css/reader.css' | asset }}" />
 {%- if motif %}
-<script src="/assets/js/motifs/{{ motif.name }}.js" defer></script>
+<script src="{{ ('/assets/js/motifs/' + motif.name + '.js') | asset }}" defer></script>
 {%- endif %}
-<script src="/assets/js/reader.js" defer></script>
+<script src="{{ '/assets/js/reader.js' | asset }}" defer></script>
 {%- endif %}

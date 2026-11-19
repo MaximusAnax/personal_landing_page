@@ -8,6 +8,20 @@ module.exports = function (eleventyConfig) {
   // Files in /static are served from the site root (resume.pdf, favicon, robots.txt, og image).
   eleventyConfig.addPassthroughCopy({ static: "/" });
 
+  // Cache-busting: `{{ "/assets/css/home.css" | asset }}` appends a short hash of the file's contents.
+  // The host tells browsers to keep CSS and JS for hours; without this, a returning visitor gets the
+  // new HTML with the old stylesheet after a deploy. The hash only changes when the file does.
+  const fs = require("fs");
+  const crypto = require("crypto");
+  eleventyConfig.addFilter("asset", (url) => {
+    try {
+      const hash = crypto.createHash("md5").update(fs.readFileSync("." + url)).digest("hex").slice(0, 8);
+      return `${url}?v=${hash}`;
+    } catch (e) {
+      return url;
+    }
+  });
+
   eleventyConfig.addGlobalData("build", () => ({
     year: new Date().getFullYear(),
     iso: new Date().toISOString(),
