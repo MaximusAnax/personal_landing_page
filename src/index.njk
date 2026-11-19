@@ -46,14 +46,19 @@ consoleLines:
   <section class="hero" id="top">
     <div class="hero__waves">
       <canvas id="waves" aria-hidden="true"></canvas>
+      <a class="hero__cue mono" href="#intro" aria-label="Scroll down to the introduction"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M5.5 12.5 12 19l6.5-6.5"/></svg></i></a>
       <h1 class="hero__title"><span class="word w1">Abdoul</span><svg class="star" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 0c1 10 6 15 16 16-10 1-15 6-16 16-1-10-6-15-16-16C10 15 15 10 16 0z"/></svg><span class="word w2">Ndiongue</span></h1>
     </div>
     <div class="sep sep--info"><b>▶</b><span>Carnegie Mellon · CS + AI · Class of '27</span><i class="grow"></i><span class="code" aria-hidden="true">1011010011010110</span><i></i><span>{{ site.location }}</span><b>◀</b></div>
-    <div class="hero__lede">
+  </section>
+
+  {# Second screen: the pitch and buttons, then About. Together they fill one screen under the pinned header
+     whenever the content fits (it runs longer on phones). #}
+  <div class="fold" id="intro">
+  <div class="hero__lede">
       <p>I build AI agents and the systems around them: the memory, evals and guardrails that make them dependable.</p>
       <div class="hero__cta mono"><a class="btn btn--fill" href="#work">See the work ↓</a><a class="btn" href="{{ site.resume }}">Resume</a><button class="btn" type="button" data-contact>Contact</button></div>
-    </div>
-  </section>
+  </div>
 
   {# About: photo first, then the short introduction, then the "now" strip. Experience follows directly. #}
   <section class="about" id="about">
@@ -72,6 +77,8 @@ consoleLines:
       <div><dt class="mono">Based in</dt><dd>{{ site.location }}</dd></div>
     </dl>
   </section>
+
+  </div>
 
   <section class="xp" id="experience">
     <div class="label mono"><span>Experience</span><a href="{{ site.resume }}">Resume (PDF) →</a></div>

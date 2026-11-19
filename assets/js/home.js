@@ -51,11 +51,15 @@ setTimeout(dropIntro, 3200);
 let ci = 0;
 $$('.word').forEach(w => { const t = w.textContent; w.setAttribute('aria-label', t); w.textContent = ''; [...t].forEach(ch => { const i = document.createElement('i'); i.textContent = ch; i.style.setProperty('--i', ci++); i.setAttribute('aria-hidden', 'true'); w.appendChild(i); }); });
 function fitTitle() {
-  const t = $('.hero__title'), one = innerWidth >= 900; t.classList.toggle('one', one); t.style.fontSize = '100px';
+  // One line on wide screens and on short ones (a phone held sideways); two lines otherwise.
+  const t = $('.hero__title'), one = innerWidth >= 900 || innerHeight < 520; t.classList.toggle('one', one); t.style.fontSize = '100px';
   const avail = t.clientWidth - parseFloat(getComputedStyle(t).paddingLeft) * 2;
   const w1 = $('.w1', t).getBoundingClientRect().width, w2 = $('.w2', t).getBoundingClientRect().width, st = 34, gap = 12;
   const need = one ? w1 + w2 + st + gap * 2 : Math.max(w1 + st + gap, w2);
   t.style.fontSize = (avail / need * 99) + 'px';
+  // Never taller than the wave field allows: keep clear of the scroll cue underneath.
+  const h = t.offsetHeight, max = t.parentElement.clientHeight - 150;
+  if (h > max && max > 40) t.style.fontSize = (parseFloat(t.style.fontSize) * max / h) + 'px';
 }
 resizers.push(fitTitle);
 
@@ -106,6 +110,8 @@ if (!reduce) setInterval(() => codes.forEach(c => { c.textContent = [...c.textCo
     if (m.set) { ctx.fillStyle = C.accent; ctx.beginPath(); ctx.arc(m.sx, m.sy, 5, 0, 7); ctx.fill(); }
   };
   resizers.push(size); addTicker(cv, tick);
+  // The field can change size without a window resize (fonts landing, the browser bar hiding); re-measure when it does.
+  if ('ResizeObserver' in window) new ResizeObserver(() => { const r = cv.getBoundingClientRect(); if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1) size(); }).observe(cv);
 }
 
 /* work */
