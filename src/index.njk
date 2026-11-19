@@ -63,7 +63,7 @@ consoleLines:
   {# About: photo first, then the short introduction, then the "now" strip. Experience follows directly. #}
   <section class="about" id="about">
     <div class="about__label mono"><span>About</span><span>Bronx, NY → {{ site.location }}</span></div>
-    <figure class="portrait duo"><img src="{{ photos.portrait.src }}" alt="{{ photos.portrait.alt }}" width="598" height="820" /></figure>
+    <figure class="portrait duo"><img src="{{ photos.portrait.src }}" alt="{{ photos.portrait.alt }}" width="{{ photos.portrait.width }}" height="{{ photos.portrait.height }}" style="object-position:{{ photos.portrait.position }}" /></figure>
     <div class="about__text">
       <p class="about__lead">I grew up in the Bronx, and I found out what I like doing behind the counter at Shake Shack.</p>
       <p>I worked there thirty hours a week in high school. About twenty of us shared one cramped kitchen, orders got lost in the noise, and everyone was irritable. I was having a great time, because every jam was a system I could redesign in my head. I still look at things that way: everything could be worse, so everything could be better.</p>
