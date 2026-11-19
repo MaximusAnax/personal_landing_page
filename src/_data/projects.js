@@ -24,42 +24,6 @@ module.exports = [
     note: "Lab code is private, happy to walk through it",
   },
   {
-    id: "orbit",
-    art: "orbit",
-    title: "Orbit",
-    kind: "Agent memory",
-    years: "2026",
-    status: "v2 in progress",
-    tagline: "Relationship memory, built three times, each time closer to the agent.",
-    summary:
-      "Orbit remembers what the people in your life told you, so you can follow up like you were paying attention. I've rebuilt it three times. Each version moves more of the work from app code into a model that is constrained, evaluated and auditable.",
-    versions: [
-      {
-        tag: "v0",
-        name: "Web app",
-        text: "Next.js and Supabase with pgvector semantic search. OpenAI extracts people, facts and follow-ups from notes.",
-        links: [
-          { label: "Live demo", href: "https://orbit-six-blond.vercel.app" },
-          { label: "Code", href: gh("orbit-web") },
-        ],
-      },
-      {
-        tag: "v1",
-        name: "Local-first iOS",
-        text: "Swift packages over a bitemporal SQLite ledger, on-device Whisper, and versioned extraction prompts gated by an eval harness.",
-        links: [{ label: "Code", href: gh("orbit") }],
-      },
-      {
-        tag: "v2",
-        name: "Agent-native",
-        text: "No app at all: plain-text memory operated by Claude skills (capture, brief, connect, gardening), with ratchet CI and an eval suite.",
-        links: [],
-        note: "Private while it holds real data",
-      },
-    ],
-    stack: ["Swift", "SQLite", "Whisper", "Next.js", "Supabase", "pgvector", "Claude"],
-  },
-  {
     id: "traceback",
     art: "traceback",
     title: "TraceBack",
@@ -102,6 +66,42 @@ module.exports = [
     stack: ["Python", "ROS 2", "FSMs", "Raspberry Pi"],
     links: [{ label: "Design write-up", href: gh("terrabot-agent") }],
     note: "Course code stays private per course policy",
+  },
+  {
+    id: "orbit",
+    art: "orbit",
+    title: "Orbit",
+    kind: "Agent memory",
+    years: "2026",
+    status: "v2 in progress",
+    tagline: "Relationship memory, built three times, each time closer to the agent.",
+    summary:
+      "Orbit remembers what the people in your life told you, so you can follow up like you were paying attention. I've rebuilt it three times. Each version moves more of the work from app code into a model that is constrained, evaluated and auditable.",
+    versions: [
+      {
+        tag: "v0",
+        name: "Web app",
+        text: "Next.js and Supabase with pgvector semantic search. OpenAI extracts people, facts and follow-ups from notes.",
+        links: [
+          { label: "Live demo", href: "https://orbit-six-blond.vercel.app" },
+          { label: "Code", href: gh("orbit-web") },
+        ],
+      },
+      {
+        tag: "v1",
+        name: "Local-first iOS",
+        text: "Swift packages over a bitemporal SQLite ledger, on-device Whisper, and versioned extraction prompts gated by an eval harness.",
+        links: [{ label: "Code", href: gh("orbit") }],
+      },
+      {
+        tag: "v2",
+        name: "Agent-native",
+        text: "No app at all: plain-text memory operated by Claude skills (capture, brief, connect, gardening), with ratchet CI and an eval suite.",
+        links: [],
+        note: "Private while it holds real data",
+      },
+    ],
+    stack: ["Swift", "SQLite", "Whisper", "Next.js", "Supabase", "pgvector", "Claude"],
   },
   {
     id: "hirevault",

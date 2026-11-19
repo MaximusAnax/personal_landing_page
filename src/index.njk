@@ -84,13 +84,14 @@ consoleLines:
     </div>
   </section>
 
-  {# The tunnel: cards are real HTML so they exist without JS; home.js only moves them. #}
+  {# The tunnel: cards are real HTML so they exist without JS; home.js only moves them.
+     Each card links to its entry in the list below; home.js opens that entry and collapses the rest. #}
   <section class="work" id="work" aria-label="Work">
     <div class="work__pin">
       <div class="work__ring"></div>
       <div class="work__mask"><div class="work__scene" id="scene">
         {%- for p in projects %}
-        <article class="card"><div class="card__art{% if p.image %} duo{% endif %}">{% if p.image %}<img src="{{ p.image.src }}" alt="{{ p.image.alt }}" loading="lazy" />{% elif p.art %}{% include "art/" + p.art + ".svg" %}{% endif %}<b aria-hidden="true">{{ loop.index | pad2 }}</b><em>{{ p.status }}</em></div><h3>{{ p.title }}</h3><p class="card__dek">{{ p.tagline }}</p><p class="mono"><span>{{ p.kind }}</span><span>#an-00{{ loop.index | pad2 }}/{{ projects.length | pad2 }}</span></p></article>
+        <a class="card" href="#{{ p.id }}" aria-label="{{ p.title }}: read the full write-up"><div class="card__art{% if p.image %} duo{% endif %}">{% if p.image %}<img src="{{ p.image.src }}" alt="{{ p.image.alt }}" />{% elif p.art %}{% include "art/" + p.art + ".svg" %}{% endif %}<b aria-hidden="true">{{ loop.index | pad2 }}</b><em>{{ p.status }}</em><span class="card__more mono" aria-hidden="true">Full write-up ↓</span></div><h3>{{ p.title }}</h3><p class="card__dek">{{ p.tagline }}</p><p class="mono"><span>{{ p.kind }}</span><span>#an-00{{ loop.index | pad2 }}/{{ projects.length | pad2 }}</span></p></a>
         {%- endfor %}
       </div></div>
       <p class="work__hint mono"><span>Keep scrolling</span></p>

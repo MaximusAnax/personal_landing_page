@@ -57,6 +57,19 @@ module.exports = function (eleventyConfig) {
     value ? String(value).replace(/\r?\n/g, "<br />") : ""
   );
 
+  // Links that leave the site (and PDFs) open in a new tab, so visitors keep their place.
+  // Applied to every built HTML page, so templates and Markdown posts need no per-link markup.
+  const siteUrl = require("./src/_data/site.js").url;
+  eleventyConfig.addTransform("newTabLinks", function (content) {
+    if (!(this.page.outputPath || "").endsWith(".html")) return content;
+    return content.replace(/<a\s([^>]*?)href="([^"]+)"([^>]*)>/g, (tag, pre, href, post) => {
+      const external = /^https?:\/\//.test(href) && !href.startsWith(siteUrl);
+      const pdf = /\.pdf(\?|#|$)/.test(href);
+      if ((!external && !pdf) || /\starget=/.test(tag)) return tag;
+      return `<a ${pre}href="${href}"${post} target="_blank" rel="noopener">`;
+    });
+  });
+
   eleventyConfig.addCollection("posts", (collection) =>
     collection
       .getFilteredByGlob("src/blog/posts/*.md")

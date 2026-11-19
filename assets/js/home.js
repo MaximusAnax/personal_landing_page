@@ -112,6 +112,15 @@ if (!reduce) setInterval(() => codes.forEach(c => { c.textContent = [...c.textCo
 {
   const sec = $('#work'), pin = $('.work__pin'), mask = $('.work__mask'), ring = $('.work__ring'), scene = $('#scene'), hint = $('.work__hint');
   const cards = $$('.card', scene).map((el, k) => ({ el, y: (k % 2 ? 1 : -1) * (4 + (k * 37 % 9)), w: 0 })), N = cards.length;
+  // A card opens its full write-up in the list below and collapses the others.
+  const openEntry = (id, scroll) => {
+    const d = document.getElementById(id); if (!d || d.tagName !== 'DETAILS') return false;
+    $$('.index details').forEach(x => { x.open = x === d; });
+    if (scroll) d.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    return true;
+  };
+  cards.forEach(c => c.el.addEventListener('click', e => { const id = c.el.getAttribute('href').slice(1); if (openEntry(id, true)) { e.preventDefault(); history.replaceState(null, '', '#' + id); } }));
+  if (location.hash.length > 1) openEntry(location.hash.slice(1), false);
   let rows = [], vw = 0, vh = 0, pw = 0, ph = 0, P = 0;
   const build = () => {
     vw = pin.clientWidth; vh = pin.clientHeight; pw = Math.min(vw * .5, 340); ph = vh * .88;
@@ -151,6 +160,9 @@ if (!reduce) setInterval(() => codes.forEach(c => { c.textContent = [...c.textCo
       const q = clamp((c - (k + .5) / N) / (.9 / N), -1, 1), vis = Math.abs(q) < 1 && o > .5;
       card.el.style.visibility = vis ? 'visible' : 'hidden'; if (!vis) return;
       const e = q * q * q * .75 + q * .25, R = vw / 2 + card.w * .7;
+      // While a card is in the middle of the screen it sits above every letter, so its text is never covered.
+      // Further out (entering or leaving) it drops back between the letter layers for depth.
+      card.el.style.zIndex = Math.abs(e * R) < vw * .18 ? 4 : 2;
       card.el.style.transform = `translate(-50%,-50%) translate3d(${(-e * R).toFixed(1)}px,${card.y}vh,0) rotateY(${(e * 42).toFixed(2)}deg) rotateZ(${(e * -5).toFixed(2)}deg)`;
     });
   };
